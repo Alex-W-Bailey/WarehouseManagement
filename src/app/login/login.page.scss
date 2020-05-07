@@ -38,6 +38,14 @@ ion-button {
     padding-bottom: 10px;
 }
 
+.remember-login-btn {
+    float: right;
+    background: none;
+    font-size: 35px;
+    border: none;
+    outline: none;
+}
+
 .input {
     margin-bottom: 25px;
 }
@@ -83,6 +91,14 @@ ion-button {
 
 #register-btn:hover {
     color: rgb(132, 146, 151);
+}
+
+.white-text {
+    color: white;
+}
+
+.green-text {
+    color: #33FF33;
 }
 
 .error-section {

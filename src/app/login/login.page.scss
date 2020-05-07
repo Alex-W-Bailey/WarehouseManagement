@@ -40,7 +40,10 @@ ion-button {
 
 .input {
     margin-bottom: 25px;
-    // background-color: #0B3049;
+}
+
+.input-err {
+    border: 5px solid red;
 }
 
 .container {

@@ -1,0 +1,97 @@
+$white-color: #fff;
+$height100: 100%;
+
+ion-grid {
+    width:100%;
+    height: $height100;
+    background: #07263b;
+}
+
+ion-row {
+    height: 75%;
+    margin: auto;
+    text-align: center;
+}
+
+ion-col {
+    margin: auto;
+    background-color: #07263b;
+}
+
+ion-button {
+    font-weight: 300;
+}
+
+.login-icon {
+    font-size: 20px;
+    margin-right: 10px;
+}
+
+.underline { 
+    text-decoration: underline black;
+}
+
+.logo-login {
+    height: 80%;
+    width: 80%;
+    padding-top: 80px;
+    padding-bottom: 10px;
+}
+
+.input {
+    margin-bottom: 25px;
+    // background-color: #0B3049;
+}
+
+.container {
+    width: 90%;
+    margin: auto;
+}
+
+.main-content {
+    height: 320px;
+    padding: 50px 0;
+}
+
+.input-content {
+    height: auto;
+    width: auto;
+    background-color: #07263b;
+    margin-top: 60px;
+}
+
+.rounded-input {
+    border-radius: 25px;
+    margin-bottom: 10px;
+}
+
+.hide {
+    display: none;
+}
+
+.remember-login {
+    margin-top: 10px;
+}
+
+#register-btn {
+    color: #488aff;
+    font-weight: bold;
+}
+
+#register-btn:hover {
+    color: rgb(132, 146, 151);
+}
+
+.error-section {
+    text-align: center;
+    margin-top: 10px;
+    border: 5px solid red;
+    background-color: lightcoral;
+    min-height: 50px;
+}
+
+.error-text {
+    color: white;
+    font-family: 'Ubuntu', sans-serif;
+    margin-top: 10px;
+}

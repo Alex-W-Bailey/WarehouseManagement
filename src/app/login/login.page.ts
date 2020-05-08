@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LoadingController } from '@ionic/angular';
 import { ApiService } from '../api.service';
 import { Plugins } from '@capacitor/core';
 
@@ -17,7 +18,7 @@ export class LoginPage implements OnInit {
   toggledRememberLogin: boolean = false;
   isLoginInfoRemembered: boolean = false;
 
-  constructor(private api: ApiService) { }
+  constructor(private api: ApiService, private loadingController: LoadingController) { }
 
   ngOnInit() {
     this.checkAutoLogin()
@@ -66,15 +67,30 @@ export class LoginPage implements OnInit {
       this.showError("password", "Password Is Required!");
     }
     else {
-      this.hideError();
-
-      this.api.attemptLogin(username, password).subscribe( async (result) => {
-        var userInfo = result[0];
-        await this.checkToSaveInfo(userInfo);
-
-        window.location.href = "/home";
-      });
+      this.doLogin(username, password);
     }
+  }
+
+  async doLogin(username, password) {
+    const loading = await this.loadingController.create({})
+    loading.present();
+
+    this.hideError();
+
+    this.api.attemptLogin(username, password).subscribe( async (result) => {
+      var userInfo = result[0];
+      
+      if(userInfo) {
+        await this.checkToSaveInfo(userInfo);
+        window.location.href = "/home";
+
+        loading.dismiss();
+      }
+      else {
+        loading.dismiss();
+        this.showError("", "Username Or Password Is Incorrect");
+      }
+    });
   }
 
   async checkToSaveInfo(userInfo) {
@@ -107,9 +123,13 @@ export class LoginPage implements OnInit {
       usernameIonItem.classList.add("input-err");
       passwordIonItem.classList.remove("input-err");
     }
-    else {
+    else if(elementErr == "password") {
       usernameIonItem.classList.remove("input-err");
       passwordIonItem.classList.add("input-err");
+    }
+    else {
+      usernameIonItem.classList.remove("input-err");
+      passwordIonItem.classList.remove("input-err");
     }
   }
 

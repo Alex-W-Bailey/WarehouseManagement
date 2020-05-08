@@ -1,6 +1,4 @@
-import { Renderer2, Inject, RendererFactory2, Injectable } from '@angular/core';
-
-
+import { } from '@angular/core';
 
 export class GlobalConstants {
   public constructor() { }

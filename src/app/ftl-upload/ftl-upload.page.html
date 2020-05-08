@@ -41,7 +41,6 @@
             <div id="error-section" class="error-section hide">
               <p id="error-text" class="error-text">Shipment ID Required!</p>
             </div>
-            <ion-button expand="block" color="secondary" class="bold" (click)="save()">SCAN</ion-button>
           </div>
         </div>
       </div>
@@ -55,25 +54,12 @@
     <div class="section-content">
       <div class="section-main-content">
         <div class="container">
-          <ion-row>
-            <ion-col size="10">
-              <ion-item color="tertiary">
-                <ion-label position="stacked" class="bold">Shipment ID</ion-label>
-                <ion-input class="bold" placeholder="Type Or Scan" id="itemBarcode" [(ngModel)]="pro_number">
-                </ion-input>
-              </ion-item>
-            </ion-col>
-            <ion-col size="2">
-              <button class="sec-btn round input-btn" (click)="scanBarcode()">
-                <ion-icon name="barcode-outline" class="btn-icon"></ion-icon>
-              </button>
-            </ion-col>
-          </ion-row>
+          <div id="imgs" class="img-item">No Images Captured...</div>
           <div class="section-end-btn">
             <div id="error-section" class="error-section hide">
               <p id="error-text" class="error-text">Shipment ID Required!</p>
             </div>
-            <ion-button expand="block" color="secondary" class="bold" (click)="save()">SCAN</ion-button>
+            <ion-button expand="block" color="secondary" class="bold" (click)="takePicture()"><ion-icon name="camera" class="btn-icon pr-3"></ion-icon>TAKE PICTURE</ion-button>
           </div>
         </div>
       </div>

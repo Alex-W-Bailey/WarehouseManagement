@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { FtlUploadPageRoutingModule } from './ftl-upload-routing.module';
 
 import { FtlUploadPage } from './ftl-upload.page';
+import { ModalpagePage } from '../modals/modalpage/modalpage.page';
 
 @NgModule({
   imports: [
@@ -15,6 +16,7 @@ import { FtlUploadPage } from './ftl-upload.page';
     IonicModule,
     FtlUploadPageRoutingModule
   ],
-  declarations: [FtlUploadPage]
+  declarations: [FtlUploadPage, ModalpagePage],
+  entryComponents: [ModalpagePage]
 })
 export class FtlUploadPageModule {}

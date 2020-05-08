@@ -1,0 +1,15 @@
+<ion-header>
+  <ion-title style="text-align: center;">
+    <h1 id="img_num"></h1>
+  </ion-title>
+</ion-header>
+
+<ion-content>
+  <div class="container">
+    <div id="opened_img"></div>
+    <div class="modal-btns">
+      <ion-button size="large" color="success" (click)="closeModal()"><ion-icon class="icon-color" name="arrow-back-outline"></ion-icon>Cancel</ion-button>
+      <ion-button size="large" color="danger" (click)="deleteImgClicked()">Delete<ion-icon class="icon-color" name="close-circle-outline"></ion-icon></ion-button>
+    </div>
+  </div>
+</ion-content>

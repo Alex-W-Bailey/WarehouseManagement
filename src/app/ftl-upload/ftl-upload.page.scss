@@ -43,6 +43,12 @@
     font-weight: bold;
 }
 
+.item-img {
+    height: 100px;
+    width: 100px;
+    margin-left: 10px;
+}
+
 .sec-btn {
     background-color: #62ADD4;
     color: white;
@@ -63,8 +69,13 @@
     font-size: 30px;
 }
 
+.pr-3 {
+    padding-right: 10px;
+}
+
 .section-content {
-    min-height: 130px;
+    min-height: 100px;
+    padding-bottom: 10px;
     height: auto;
     background-color: #0B3049;
     margin-top: 2px;

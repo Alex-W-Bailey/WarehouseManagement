@@ -14,17 +14,12 @@
 						</ion-item>
 						<ion-item id="ion-password" class="input">
 							<ion-input type="password" placeholder="Password" [(ngModel)]="password"
-								(keyup.enter)="AttemptLogin()">
+								(keyup.enter)="login()">
 								<ion-icon class="login-icon" name="key-outline"></ion-icon>
 							</ion-input>
 						</ion-item>
 					</div>
 					<div class="remember-login">
-						<!-- <span>
-							<ion-checkbox id="remember-pass-check" [(ngModel)]="isRememberChecked"
-								(ionChange)="rememberLogin()"></ion-checkbox>
-							<p style="font-weight: bold; display: inline; padding-left: 4px; color: white">Remeber Login?</p>
-            </span> -->
             <ion-row>
               <ion-col size="6">
                 <p style="font-weight: bold; color: white; float: left">Remeber Login?</p>
@@ -39,7 +34,7 @@
 					</div>
 					<div style="padding-top: 15px">
 						<p id="register-btn" (click)="register()">Don't Have An Account? Register</p>
-						<ion-button size="large" expand="block" (click)="AttemptLogin()"
+						<ion-button size="large" expand="block" (click)="login()"
 							style="font-weight: bold;">
 							<p>Login</p>
 						</ion-button>

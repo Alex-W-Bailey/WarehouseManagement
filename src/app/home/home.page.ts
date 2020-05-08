@@ -21,4 +21,8 @@ export class HomePage {
 
     window.location.href = "/login";
   }
+
+  ftlUpload() {
+    window.location.href = "/ftl-upload";
+  }
 }

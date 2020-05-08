@@ -3,16 +3,18 @@
     <ion-title>
       <div>
         <img class="logo-header" src="../../assets/imgs/2x7-FreightSnap-Logo-Stickers.jpg" />
-        <ion-button style="float: right; margin-top: 12px; font-weight: bold;" (click)="logout()">Logout</ion-button>
+        <ion-button color="secondary" style="float: right; margin-top: 12px; font-weight: bold;" (click)="logout()">
+          Logout</ion-button>
       </div>
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <div class="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer"
-        href="https://ionicframework.com/docs/components">UI Components</a></p>
+  <div class="container center">
+    <button class="dashboardTile" (click)="dailyView()">
+      <ion-icon name="cloud-upload-outline" class="tile-icon"></ion-icon>
+      <p class="tile-text">FTL Uploads</p>
+    </button>
   </div>
 </ion-content>

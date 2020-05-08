@@ -7,3 +7,31 @@
   width: 90%;
   margin: auto;
 }
+
+.center {
+  text-align: center;
+}
+
+.tile-icon {
+  font-size: 50px;
+}
+
+.tile-text {
+  margin: 0;
+  padding-top: 10px;
+  font-weight: bold;
+  font-size: 15px;
+}
+
+.dashboardTile {
+  color: white;
+  border-radius: 8px;
+  border: 6px solid #0B3049;
+  background-color: #07263b;
+  text-align: center;
+  height: 150px;
+  width: 150px;
+  margin: 20px auto;
+  z-index: -1;
+  box-shadow: 0px -1px 3px #aaa;
+}

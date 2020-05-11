@@ -10,58 +10,23 @@
 </ion-header>
 
 <ion-content>
-  <div class="container">
-    <div class="content-header">
-      <h1 style="font-weight: bold;">FTL Upload</h1>
-    </div>
-    <div class="section-title alt-blue">
-      <span>
-        <ion-icon name="create" class="section-title-icon inline"></ion-icon>
-        <p class="section-title-text">Enter ID</p>
-      </span>
-    </div>
-    <div class="section-content">
-      <div class="section-main-content">
-        <div class="container">
-          <ion-row>
-            <ion-col size="10">
-              <ion-item color="tertiary">
-                <ion-label position="stacked" class="bold">Shipment ID</ion-label>
-                <ion-input class="bold" placeholder="Type Or Scan" id="itemBarcode" [(ngModel)]="pro_number">
-                </ion-input>
-              </ion-item>
-            </ion-col>
-            <ion-col size="2">
-              <button class="sec-btn round input-btn" (click)="scanBarcode()">
-                <ion-icon name="barcode-outline" class="btn-icon"></ion-icon>
-              </button>
-            </ion-col>
-          </ion-row>
-          <div class="section-end-btn">
-            <div id="error-section" class="error-section hide">
-              <p id="error-text" class="error-text">Shipment ID Required!</p>
-            </div>
-          </div>
-        </div>
+  <div class="content">
+    <div class="container">
+      <div class="center">
+        <h1 class="bold dark-text">FTL Upload</h1>
       </div>
-    </div>
-    <div class="section-title alt-blue">
-      <span>
-        <ion-icon name="cloud-upload" class="section-title-icon inline"></ion-icon>
-        <p class="section-title-text">Upload Images</p>
-      </span>
-    </div>
-    <div class="section-content">
-      <div class="section-main-content">
-        <div class="container">
-          <div id="imgs" class="img-item">No Images Captured...</div>
-          <div class="section-end-btn">
-            <div id="error-section" class="error-section hide">
-              <p id="error-text" class="error-text">Shipment ID Required!</p>
-            </div>
-            <ion-button expand="block" color="secondary" class="bold" (click)="takePicture()"><ion-icon name="camera" class="btn-icon pr-3"></ion-icon>TAKE PICTURE</ion-button>
-          </div>
-        </div>
+      <hr class="thick dark"/>
+      <div id="truckSection" class="center">
+        <h2>No Truck Started</h2>
+        <button class="round-btn bold med-text dark white-text" (click)="createNewTruck()">Start Truck</button>
+      </div>
+      <div id="newTruckSection" class="hide">
+        <ion-item style="width: 90%; margin: auto;">
+          <ion-label position="stacked" class="bold">Truckload ID</ion-label>
+          <ion-input class="bold" placeholder="Enter Truckload ID" [(ngModel)]="truckID"></ion-input>
+        </ion-item>
+        <button class="small-round-btn white-text bold small-text" (click)="cancel()">Cancel</button>
+        <button class="small-round-btn white-text bold small-text" (click)="startNewTruck()">Start Truck</button>
       </div>
     </div>
   </div>

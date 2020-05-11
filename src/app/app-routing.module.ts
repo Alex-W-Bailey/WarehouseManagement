@@ -19,6 +19,10 @@ const routes: Routes = [
     path: 'ftl-upload',
     loadChildren: () => import('./ftl-upload/ftl-upload.module').then( m => m.FtlUploadPageModule)
   },
+  {
+    path: 'truckload/:id',
+    loadChildren: () => import('./truckload/truckload.module').then( m => m.TruckloadPageModule)
+  },
 ];
 
 @NgModule({

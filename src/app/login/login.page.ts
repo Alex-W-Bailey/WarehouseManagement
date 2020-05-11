@@ -26,22 +26,22 @@ export class LoginPage implements OnInit {
 
   async checkAutoLogin() {
     await this.getRememberedLoginInfo();
-  
+
     console.log("is login remembered: " + this.isLoginInfoRemembered);
 
-    if(this.isLoginInfoRemembered === true) {
+    if (this.isLoginInfoRemembered === true) {
       this.attemptRememberedLogin();
     }
   }
 
   login() {
     const { username, password } = this;
-    this.attemptLogin(username, password);
+    this.attemptLogin(username, password, false);
   }
 
   async attemptRememberedLogin() {
     var user_data = await this.getUserLoginData();
-    this.attemptLogin(user_data.username, user_data.password);
+    this.attemptLogin(user_data.username, user_data.password, true);
   }
 
   async getUserLoginData() {
@@ -57,7 +57,7 @@ export class LoginPage implements OnInit {
   }
 
 
-  attemptLogin(username, password) {
+  attemptLogin(username, password, autoLoginVal) {
     console.log("username: ", username + " password: ", password);
 
     if (username === "" || username == undefined) {
@@ -77,13 +77,12 @@ export class LoginPage implements OnInit {
 
     this.hideError();
 
-    this.api.attemptLogin(username, password).subscribe( async (result) => {
+    this.api.attemptLogin(username, password).subscribe(async (result) => {
       var userInfo = result[0];
-      
-      if(userInfo) {
-        await this.checkToSaveInfo(userInfo);
-        window.location.href = "/home";
 
+      if (userInfo) {
+        await this.checkToSaveInfo(userInfo, true);
+        window.location.href = "/home";
         loading.dismiss();
       }
       else {
@@ -93,19 +92,14 @@ export class LoginPage implements OnInit {
     });
   }
 
-  async checkToSaveInfo(userInfo) {
-    if (userInfo) {
-      if (this.toggledRememberLogin == true) {
-        console.log(userInfo);
-        this.setLoginInfo("true", userInfo);
-      }
-      else {
-        this.setLoginInfo("false", "");
-        console.log("don't remember");
-      }
+  async checkToSaveInfo(userInfo, autoLogin) {
+    if (this.toggledRememberLogin ==   true) {
+      console.log(userInfo);
+      this.setLoginInfo("true", userInfo);
     }
     else {
-      console.log("error");
+      this.setLoginInfo("false", "");
+      console.log("don't remember");
     }
   }
 
@@ -123,7 +117,7 @@ export class LoginPage implements OnInit {
       usernameIonItem.classList.add("input-err");
       passwordIonItem.classList.remove("input-err");
     }
-    else if(elementErr == "password") {
+    else if (elementErr == "password") {
       usernameIonItem.classList.remove("input-err");
       passwordIonItem.classList.add("input-err");
     }
@@ -176,7 +170,7 @@ export class LoginPage implements OnInit {
   }
 
   async saveLoginInfo(userInfo) {
-    if(userInfo !== "") {
+    if (userInfo !== "") {
       this.save(userInfo);
     }
   }
@@ -192,10 +186,10 @@ export class LoginPage implements OnInit {
     const { value } = await Storage.get({ key: "catalog_remember_login" });
     console.log("saved value: " + value);
 
-    if(value == "true") {
+    if (value == "true") {
       this.isLoginInfoRemembered = true;
     }
-    else if(value == "false") {
+    else if (value == "false") {
       this.isLoginInfoRemembered = false
     }
   }

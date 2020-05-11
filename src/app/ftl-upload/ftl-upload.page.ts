@@ -4,6 +4,7 @@ import { BarcodeScanner, BarcodeScannerOptions } from "@ionic-native/barcode-sca
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { ModalpagePage } from '../modals/modalpage/modalpage.page';
 import { GlobalConstants } from '../common/global'
+import { interval } from 'rxjs';
 
 @Component({
   selector: 'app-ftl-upload',
@@ -18,6 +19,7 @@ export class FtlUploadPage implements OnInit {
   constructor(private barcodeCtrl: BarcodeScanner, private camera: Camera, private renderer: Renderer2, private modalCtrl: ModalController) { }
 
   ngOnInit() {
+    this.startTimer();
   }
 
   scanBarcode() {
@@ -109,9 +111,17 @@ export class FtlUploadPage implements OnInit {
 
     return (await modal).present();
   }
+
+  public startTimer() {
+    interval(1000).pipe().subscribe(() => {
+      this.showImgs();
+    });
+  }
 }
 
 export function deleteImg(id) {
+  console.log("img id to delete: " + id);
+
   GlobalConstants.allImgs.splice(id, 1);
   GlobalConstants.numOfImages--;
 }

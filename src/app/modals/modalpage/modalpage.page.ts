@@ -1,6 +1,8 @@
 import { Component, OnInit, Renderer2 } from '@angular/core';
 import { NavParams } from "@ionic/angular";
 import { ModalController, AngularDelegate } from '@ionic/angular';
+import { deleteImg } from "../../truckload/truckload.page";
+
 
 @Component({
   selector: 'app-modalpage',
@@ -37,6 +39,12 @@ export class ModalpagePage implements OnInit {
   }
 
   closeModal() {
+    this.modalCtrl.dismiss();
+  }
+
+  deleteImgClicked() {
+    deleteImg(this.passId);
+
     this.modalCtrl.dismiss();
   }
 }

@@ -7,39 +7,76 @@
       </ion-title>
     </div>
     <div class="container">
-      <div class="truckloadIDSection alt-blue center shadow">
-        <div class="truckInfo">
-          <h1 class="md-text white-text m-0">Truck</h1>
-          <p id="truckId" class="lg-text white-text m-0 bold">123445</p>
-          <button class="newItemBtn"><ion-icon name="add" class="md-text white-text bold" (click)="addNewItem()"></ion-icon></button>
+      <div id="truckInfo">
+        <div class="truckloadIDSection purple center shadow">
+          <div class="truckInfo">
+            <h1 class="md-text white-text m-0">Truck</h1>
+            <p id="truckId" class="lg-text white-text m-0 bold">123445</p>
+            <button class="newItemBtn"><ion-icon name="add" class="md-text white-text bold" (click)="addNewItem()"></ion-icon></button>
+          </div>
+        </div>
+        <div id="truckItemsSection" class="truckItemsSection">
+          <h1 class="white-text bold m-0">All Truck Items</h1>
+          <span><p class="white-text m-0 inline">Number: </p><p id="numOfItems" class="white-text m-0 inline">0</p></span>
         </div>
       </div>
-      <div class="truckItemsSection">
-        <h1 class="white-text bold m-0">All Truck Items</h1>
-        <p class="white-text m-0">Number: 4</p>
-        <div class="truckItem">
-          <div class="container">
-            <p class="m-0 itemName bold">123456</p>
-            <p class="m-0 itemTime">loaded at 10:09 AM</p>
+      <div id="newItem" class="hide">
+        <div class="content-header">
+          <h1 class="bold white-text">Add Item To Truck</h1>
+        </div>
+        <div class="section-title alt-blue">
+          <span>
+            <ion-icon name="create" class="section-title-icon inline"></ion-icon>
+            <p class="section-title-text">Enter ID</p>
+          </span>
+        </div>
+        <div class="section-content">
+          <div class="section-main-content">
+            <div class="container">
+              <ion-row>
+                <ion-col size="10">
+                  <ion-item color="tertiary">
+                    <ion-label position="stacked" class="bold">Shipment ID</ion-label>
+                    <ion-input class="bold" placeholder="Type Or Scan" id="itemBarcode" [(ngModel)]="pro_number">
+                    </ion-input>
+                  </ion-item>
+                </ion-col>
+                <ion-col size="2">
+                  <button class="sec-btn round input-btn" (click)="scanBarcode()">
+                    <ion-icon name="barcode-outline" class="btn-icon"></ion-icon>
+                  </button>
+                </ion-col>
+              </ion-row>
+              <div class="section-end-btn">
+                <div id="error-section" class="error-section hide">
+                  <p id="error-text" class="error-text">Shipment ID Required!</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="truckItem">
-          <div class="container">
-            <p class="m-0 itemName bold">123456</p>
-            <p class="m-0 itemTime">loaded at 10:12 AM</p>
+        <div class="section-title alt-blue">
+          <span>
+            <ion-icon name="cloud-upload" class="section-title-icon inline"></ion-icon>
+            <p class="section-title-text">Upload Images</p>
+          </span>
+        </div>
+        <div class="section-content">
+          <div class="section-main-content">
+            <div class="container">
+              <div id="imgs" class="img-item">No Images Captured...</div>
+              <div class="section-end-btn">
+                <div id="error-section" class="error-section hide">
+                  <p id="error-text" class="error-text">Shipment ID Required!</p>
+                </div>
+                <ion-button expand="block" color="secondary" class="bold" (click)="takePicture()"><ion-icon name="camera" class="btn-icon pr-3"></ion-icon>TAKE PICTURE</ion-button>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="truckItem">
-          <div class="container">
-            <p class="m-0 itemName bold">123456</p>
-            <p class="m-0 itemTime">loaded at 10:09 AM</p>
-          </div>
-        </div>
-        <div class="truckItem">
-          <div class="container">
-            <p class="m-0 itemName bold">123456</p>
-            <p class="m-0 itemTime">loaded at 10:12 AM</p>
-          </div>
+        <div class="center">
+          <button style="margin-top: 30px;" class="truck-btn red white-text" (click)="hideAddingItem()">CANCEL</button>
+          <button style="margin-top: 30px;" class="ml-3 truck-btn green white-text" (click)="pushItemToTruck()">DONE</button>
         </div>
       </div>
     </div>

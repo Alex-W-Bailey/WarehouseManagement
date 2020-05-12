@@ -4,6 +4,8 @@ export class GlobalConstants {
   public constructor() { }
 
   public static truckItems: any[] = [];
+  public static allImgs: any[] = [];
+
 
   /*
     truckItems should look like this:

@@ -67,11 +67,11 @@ export class LoginPage implements OnInit {
       this.showError("password", "Password Is Required!");
     }
     else {
-      this.doLogin(username, password);
+      this.doLogin(username, password, autoLoginVal);
     }
   }
 
-  async doLogin(username, password) {
+  async doLogin(username, password, autoLoginVal) {
     const loading = await this.loadingController.create({})
     loading.present();
 
@@ -81,7 +81,7 @@ export class LoginPage implements OnInit {
       var userInfo = result[0];
 
       if (userInfo) {
-        await this.checkToSaveInfo(userInfo, true);
+        await this.checkToSaveInfo(userInfo, autoLoginVal);
         window.location.href = "/home";
         loading.dismiss();
       }
@@ -93,13 +93,15 @@ export class LoginPage implements OnInit {
   }
 
   async checkToSaveInfo(userInfo, autoLogin) {
-    if (this.toggledRememberLogin ==   true) {
-      console.log(userInfo);
-      this.setLoginInfo("true", userInfo);
-    }
-    else {
-      this.setLoginInfo("false", "");
-      console.log("don't remember");
+    if(autoLogin == false) {
+      if (this.toggledRememberLogin ==   true) {
+        console.log(userInfo);
+        this.setLoginInfo("true", userInfo);
+      }
+      else {
+        this.setLoginInfo("false", "");
+        console.log("don't remember");
+      }
     }
   }
 

@@ -16,9 +16,19 @@
         <h1 class="bold dark-text">FTL Upload</h1>
       </div>
       <hr class="thick dark"/>
-      <div id="truckSection" class="center">
+      <div id="truckSection" class="center hide">
         <h2>No Truck Started</h2>
         <button class="round-btn bold med-text dark white-text" (click)="createNewTruck()">Start Truck</button>
+      </div>
+      <div id="startedTruckSection">
+        <div class="truckInfo dark-border">
+          <div class="container">
+            <div class="truckContent">
+              <p class="bold white-text m-0 md-text">2143569</p>
+              <p class="white-text m-0 inline">Started at 3:41pm 5/12/2020</p>
+            </div>
+          </div>
+        </div>
       </div>
       <div id="newTruckSection" class="hide">
         <ion-item style="width: 90%; margin: auto;">

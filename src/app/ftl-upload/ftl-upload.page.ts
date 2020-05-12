@@ -21,6 +21,7 @@ export class FtlUploadPage implements OnInit {
   constructor(private barcodeCtrl: BarcodeScanner, private camera: Camera, private renderer: Renderer2, private modalCtrl: ModalController) { }
 
   ngOnInit() {
+    this.checkForStartedTruck();
   }
 
   createNewTruck() {
@@ -68,5 +69,13 @@ export class FtlUploadPage implements OnInit {
 
     truckSection.classList.remove("hide");
     newTruckSetion.classList.add("hide");
+  }
+
+  async checkForStartedTruck() {
+    const { value } = await Storage.get({ key: "catalog_truckloadsID" });
+
+    if(value !== "" || value !== null || value !== undefined) {
+      console.log("truck already started");  
+    }
   }
 }

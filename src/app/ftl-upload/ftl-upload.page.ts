@@ -70,10 +70,3 @@ export class FtlUploadPage implements OnInit {
     newTruckSetion.classList.add("hide");
   }
 }
-
-export function deleteImg(id) {
-  console.log("img id to delete: " + id);
-
-  GlobalConstants.allImgs.splice(id, 1);
-  GlobalConstants.numOfImages--;
-}

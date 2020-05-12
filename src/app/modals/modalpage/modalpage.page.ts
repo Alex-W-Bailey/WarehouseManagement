@@ -1,6 +1,5 @@
 import { Component, OnInit, Renderer2 } from '@angular/core';
 import { NavParams } from "@ionic/angular";
-import { FtlUploadPage, deleteImg } from "../../ftl-upload/ftl-upload.page";
 import { ModalController, AngularDelegate } from '@ionic/angular';
 
 @Component({
@@ -38,12 +37,6 @@ export class ModalpagePage implements OnInit {
   }
 
   closeModal() {
-    this.modalCtrl.dismiss();
-  }
-
-  deleteImgClicked() {
-    deleteImg(this.passId);
-
     this.modalCtrl.dismiss();
   }
 }

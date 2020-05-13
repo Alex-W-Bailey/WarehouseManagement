@@ -24,6 +24,8 @@ export class FtlUploadPage implements OnInit {
 
   ngOnInit() {
     this.checkForStartedTruck();
+
+    console.log(GlobalConstants.truckItems);
   }
 
   createNewTruck() {

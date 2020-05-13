@@ -4,8 +4,10 @@ import { BarcodeScanner, BarcodeScannerOptions } from "@ionic-native/barcode-sca
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { interval } from 'rxjs';
 import { ModalController } from '@ionic/angular';
+import { Plugins } from '@capacitor/core';
 
 import { ModalpagePage } from '../modals/modalpage/modalpage.page';
+const { Storage } = Plugins;
 
 @Component({
   selector: 'app-truckload',
@@ -29,7 +31,10 @@ export class TruckloadPage implements OnInit {
     var truckIdText = document.getElementById("truckId");
     truckIdText.innerHTML = truckId;
 
-    this.timerControl();
+    console.log(GlobalConstants.truckItems);
+
+    await this.getTruckItems();
+    await this.timerControl();
   }
 
   goBack() {
@@ -60,8 +65,10 @@ export class TruckloadPage implements OnInit {
     });
   }
 
-  getTruckItems() {
-    this.truckItems = GlobalConstants.truckItems;
+  async getTruckItems() {
+    const { value } = await Storage.get({ key: "catalog_truckItems" });
+    this.truckItems = JSON.parse(value)
+
     console.log(this.truckItems);
 
     var numOfItemsText = document.getElementById("numOfItems");
@@ -125,8 +132,24 @@ export class TruckloadPage implements OnInit {
       imgs: GlobalConstants.allImgs
     }
 
-    GlobalConstants.truckItems.push(item);
-    console.log("pushed");
+    var truckItemsArr = [];
+
+    const { value } = await Storage.get({ key:"catalog_truckItems"});
+    var existingData = JSON.parse(value)
+
+    if(value !== null) {
+      for(var i = 0; i < existingData.length; i++) {
+        truckItemsArr.push(existingData[i]);
+      }      
+    }
+
+    truckItemsArr.push(item);      
+
+    await Storage.set({
+      key: "catalog_truckItems",
+      value: JSON.stringify(truckItemsArr)
+    });
+
     this.getTruckItems();
 
     this.pro_number = "";

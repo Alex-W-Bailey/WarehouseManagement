@@ -19,7 +19,7 @@ export class TruckloadPage implements OnInit {
   truckItems: any;
   pro_number: string = "";
   itemBarcode: string = "";
-
+  timer: any;
 
   async ngOnInit() {
     var url = window.location.href;
@@ -29,7 +29,12 @@ export class TruckloadPage implements OnInit {
     var truckIdText = document.getElementById("truckId");
     truckIdText.innerHTML = truckId;
 
-    this.startTimer();
+    this.timerControl();
+  }
+
+  goBack() {
+    console.log("goBack");
+    this.timerEnd();
   }
 
   scanBarcode() {
@@ -186,11 +191,14 @@ export class TruckloadPage implements OnInit {
     }
   }
 
-  public startTimer() {
-    interval(1000).pipe().subscribe(() => {
-      this.showImgs();
-    });
+  public timerControl() {
+    this.timer = setTimeout(this.showImgs, 1000);
   }
+
+  public timerEnd() {
+    clearTimeout(this.timer);
+  }
+
 
   async showModal(imgClicked) {
     console.log(imgClicked);

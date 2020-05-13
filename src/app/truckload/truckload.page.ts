@@ -67,7 +67,8 @@ export class TruckloadPage implements OnInit {
     var numOfItemsText = document.getElementById("numOfItems");
     numOfItemsText.innerHTML = this.truckItems.length;
 
-    var truckItemsSection = document.getElementById("truckItemsSection");
+    var allTruckItems = document.getElementById("allTruckItems");
+    allTruckItems.innerHTML = "";
 
     for(var i = 0; i < this.truckItems.length; i++) {
       var splitTime = this.truckItems[i].time.split(":");
@@ -97,7 +98,7 @@ export class TruckloadPage implements OnInit {
       container.appendChild(itemName);
       container.appendChild(itemTime);
       truckItem.appendChild(container);
-      truckItemsSection.appendChild(truckItem);
+      allTruckItems.appendChild(truckItem);
     }
   }
 

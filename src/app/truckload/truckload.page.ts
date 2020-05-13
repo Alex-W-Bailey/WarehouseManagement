@@ -102,7 +102,8 @@ export class TruckloadPage implements OnInit {
   }
 
   async addNewItem() {
-    console.log("add new item");
+    var truckDoneBtn = document.getElementById("truckDoneBtn");
+    truckDoneBtn.classList.add("hide");
 
     var truckSection = document.getElementById("truckInfo");
     truckSection.classList.add("hide");
@@ -135,6 +136,9 @@ export class TruckloadPage implements OnInit {
   }
 
   hideAddingItem() {
+    var truckDoneBtn = document.getElementById("truckDoneBtn");
+    truckDoneBtn.classList.remove("hide");
+
     var truckSection = document.getElementById("truckInfo");
     truckSection.classList.remove("hide");
 

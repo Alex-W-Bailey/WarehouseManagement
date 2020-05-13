@@ -29,9 +29,27 @@
     background-color: #07263b;
 }
 
+.dark {
+    background-color: #07263b;
+}
+
 .container {
     width: 90%;
     margin: auto;
+}
+
+.truckDone {
+    height: 45px;
+    width: 100%;
+    background-color: #ff4961;
+    color: white;
+    font-weight: bold;
+    font-size: 17px;
+    border-radius: 5px;
+}
+
+.footer {
+    padding: 30px 0;
 }
 
 .truckloadIDSection {
@@ -136,7 +154,6 @@
 }
 
 .sec-btn {
-    background-color: #62ADD4;
     color: white;
     height: 40px;
     width: 40px;

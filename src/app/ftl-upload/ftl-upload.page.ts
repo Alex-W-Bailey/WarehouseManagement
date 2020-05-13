@@ -112,32 +112,17 @@ export class FtlUploadPage implements OnInit {
       truckID.classList.add("md-text");
       truckID.innerHTML = this.startedTruckId;
 
-      var deleteBtn = this.renderer.createElement("button");
-      deleteBtn.classList.add("deleteBtn");
-      var icon = this.renderer.createElement("ion-icon");
-      this.renderer.setProperty(icon, "name", "close-circle-outline");
-      icon.classList.add("red-text");
-      icon.classList.add("lg-text");
-      this.renderer.appendChild(deleteBtn, icon);
-
       var truckTimestamp = this.renderer.createElement("p");
       truckTimestamp.classList.add("white-text");
       truckTimestamp.classList.add("m-0");
       truckTimestamp.classList.add("inline");
       truckTimestamp.innerHTML = "Truck started at " + hours + ":" + mins + amPm + " " + formattedTruckDate
     
-      this.renderer.appendChild(truckContent, deleteBtn);
       this.renderer.appendChild(truckContent, truckID);
       this.renderer.appendChild(truckContent, truckTimestamp);
 
       var truck = document.getElementById("main-truck-area");
-      // truck.innerHTML = "";
-
-      console.log(this.startedTruckId);
-
       truckInfo.appendChild(truckContent);
-      // truck.appendChild();
-
       truck.classList.remove("hide");
 
       truckInfo.addEventListener("click", (evt) => {

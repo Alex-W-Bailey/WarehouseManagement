@@ -7,6 +7,7 @@ import { TruckloadPageRoutingModule } from './truckload-routing.module';
 import { TruckloadPage } from './truckload.page';
 
 import { ModalpagePage } from '../modals/modalpage/modalpage.page';
+import { TruckItemPage } from '../modals/truck-item/truck-item.page'
 
 @NgModule({
   imports: [
@@ -15,7 +16,7 @@ import { ModalpagePage } from '../modals/modalpage/modalpage.page';
     IonicModule,
     TruckloadPageRoutingModule
   ],
-  declarations: [TruckloadPage, ModalpagePage],
-  entryComponents: [ModalpagePage]
+  declarations: [TruckloadPage, ModalpagePage, TruckItemPage],
+  entryComponents: [ModalpagePage, TruckItemPage]
 })
 export class TruckloadPageModule {}

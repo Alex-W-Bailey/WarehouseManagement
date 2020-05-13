@@ -23,6 +23,10 @@ const routes: Routes = [
     path: 'truckload/:id',
     loadChildren: () => import('./truckload/truckload.module').then( m => m.TruckloadPageModule)
   },
+  {
+    path: 'truck-item',
+    loadChildren: () => import('./modals/truck-item/truck-item.module').then( m => m.TruckItemPageModule)
+  },
 ];
 
 @NgModule({

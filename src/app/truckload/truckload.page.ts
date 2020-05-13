@@ -7,6 +7,8 @@ import { ModalController } from '@ionic/angular';
 import { Plugins } from '@capacitor/core';
 
 import { ModalpagePage } from '../modals/modalpage/modalpage.page';
+import { TruckItemPage } from '../modals/truck-item/truck-item.page';
+
 const { Storage } = Plugins;
 
 @Component({
@@ -85,14 +87,20 @@ export class TruckloadPage implements OnInit {
 
       var truckItem = this.renderer.createElement("div");
       truckItem.classList.add("truckItem");
+      this.renderer.setProperty(truckItem, "id", i);
+      this.renderer.setAttribute(truckItem, "name", "truck-item");
       var container = this.renderer.createElement("div");
       container.classList.add("container");
       var itemName = this.renderer.createElement("p");
+      this.renderer.setProperty(itemName, "id", i);
+      this.renderer.setAttribute(itemName, "name", "truck-item");
       itemName.classList.add("m-0");
       itemName.classList.add("itemName");
       itemName.classList.add("bold");
       itemName.innerHTML = this.truckItems[i].id;
       var itemTime = this.renderer.createElement("p");
+      this.renderer.setProperty(itemTime, "id", i);
+      this.renderer.setAttribute(itemTime, "name", "truck-item");
       itemTime.classList.add("m-0");
       itemTime.classList.add("itemTime");
       itemTime.innerHTML = "loaded at " + hours + ":" + mins + amPm;
@@ -102,6 +110,29 @@ export class TruckloadPage implements OnInit {
       truckItem.appendChild(container);
       allTruckItems.appendChild(truckItem);
     }
+
+    var truckItemElements = document.getElementsByName("truck-item");
+    console.log(truckItemElements.length);
+    for(var i = 0; i < truckItemElements.length; i++) {
+      truckItemElements[i].addEventListener("click", (evt) => {
+        this.truckItemClick(evt);
+      });
+    }
+  }
+
+  async truckItemClick(evt) {
+    var id = evt.target.id;
+    console.log("clicked " + id);
+    console.log(id);
+
+    const modal = this.modalCtrl.create({
+      component: TruckItemPage,
+      componentProps: {
+        id: id,
+      }
+    });
+
+    return (await modal).present();
   }
 
   async addNewItem() {

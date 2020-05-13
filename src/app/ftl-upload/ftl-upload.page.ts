@@ -52,7 +52,7 @@ export class FtlUploadPage implements OnInit {
 
   async saveTruckloadStart() {
     var today = new Date();
-    
+
     var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
     var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
     var dateTime = date + ' ' + time;
@@ -77,31 +77,33 @@ export class FtlUploadPage implements OnInit {
     await this.getTruckId();
     await this.getTruckTime();
 
-    var truckInfo = document.getElementById("truckInfo-main");
+    console.log(this.startedTruckId);
 
-    var truckTimestampSplit = this.startedTruckTime.split(" ");
-    var truckDate = truckTimestampSplit[0].split("-");
-    var truckYear = truckDate[0];
-    var truckMonth = truckDate[1];
-    var truckDay = truckDate[2];
-    var truckTime = truckTimestampSplit[1];
+    if (this.startedTruckId) {
+      var truckInfo = document.getElementById("truckInfo-main");
 
-    var formattedTruckDate = truckMonth + "/" + truckDay + "/" + truckYear
+      var truckTimestampSplit = this.startedTruckTime.split(" ");
+      var truckDate = truckTimestampSplit[0].split("-");
+      var truckYear = truckDate[0];
+      var truckMonth = truckDate[1];
+      var truckDay = truckDate[2];
+      var truckTime = truckTimestampSplit[1];
 
-    if(this.startedTruckId !== "" || this.startedTruckId !== null || this.startedTruckId !== undefined) {
+      var formattedTruckDate = truckMonth + "/" + truckDay + "/" + truckYear
+
       var splitTime = truckTime.split(":");
       var hrs = splitTime[0];
       var mins = splitTime[1];
 
       var combined = hrs + "" + mins;
 
-      var hours24 = parseInt(combined.substring(0, 2),10);
+      var hours24 = parseInt(combined.substring(0, 2), 10);
       var hours = ((hours24 + 11) % 12) + 1;
       var amPm = hours24 > 11 ? 'pm' : 'am';
-      
+
       var truckContent = this.renderer.createElement("div");
       truckContent.classList.add("truckContent");
-    
+
       var truckID = this.renderer.createElement("p");
       truckID.classList.add("bold");
       truckID.classList.add("white-text");
@@ -114,7 +116,7 @@ export class FtlUploadPage implements OnInit {
       truckTimestamp.classList.add("m-0");
       truckTimestamp.classList.add("inline");
       truckTimestamp.innerHTML = "Truck started at " + hours + ":" + mins + amPm + " " + formattedTruckDate
-    
+
       this.renderer.appendChild(truckContent, truckID);
       this.renderer.appendChild(truckContent, truckTimestamp);
 
@@ -125,6 +127,10 @@ export class FtlUploadPage implements OnInit {
       truckInfo.addEventListener("click", (evt) => {
         window.location.href = `/truckload/${this.startedTruckId}`;
       })
+    }
+    else {
+      var createNewTruckSection = document.getElementById("truckSection");
+      createNewTruckSection.classList.remove("hide");    
     }
   }
 

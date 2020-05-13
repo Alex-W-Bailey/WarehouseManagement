@@ -31,14 +31,11 @@ export class TruckloadPage implements OnInit {
     var truckIdText = document.getElementById("truckId");
     truckIdText.innerHTML = truckId;
 
-    console.log(GlobalConstants.truckItems);
-
     await this.getTruckItems();
     await this.timerControl();
   }
 
   goBack() {
-    console.log("goBack");
     this.timerEnd();
   }
 
@@ -68,8 +65,6 @@ export class TruckloadPage implements OnInit {
   async getTruckItems() {
     const { value } = await Storage.get({ key: "catalog_truckItems" });
     this.truckItems = JSON.parse(value)
-
-    console.log(this.truckItems);
 
     var numOfItemsText = document.getElementById("numOfItems");
     numOfItemsText.innerHTML = this.truckItems.length;
@@ -229,8 +224,6 @@ export class TruckloadPage implements OnInit {
 
 
   async showModal(imgClicked) {
-    console.log(imgClicked);
-
     var id = imgClicked.id;
     var img = imgClicked.src;
 

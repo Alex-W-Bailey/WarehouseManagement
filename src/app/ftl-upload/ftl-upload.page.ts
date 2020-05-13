@@ -24,8 +24,6 @@ export class FtlUploadPage implements OnInit {
 
   ngOnInit() {
     this.checkForStartedTruck();
-
-    console.log(GlobalConstants.truckItems);
   }
 
   createNewTruck() {
@@ -91,9 +89,6 @@ export class FtlUploadPage implements OnInit {
     var formattedTruckDate = truckMonth + "/" + truckDay + "/" + truckYear
 
     if(this.startedTruckId !== "" || this.startedTruckId !== null || this.startedTruckId !== undefined) {
-      console.log("truck already started");  
-      console.log(this.startedTruckId); 
-
       var splitTime = truckTime.split(":");
       var hrs = splitTime[0];
       var mins = splitTime[1];

@@ -80,7 +80,7 @@
     width: 50px;
     border-radius: 25px;
     position: relative;
-    top: 10px;
+    top: 22px;
     background-color: #ff4961;
     outline: none;
 }
@@ -159,6 +159,11 @@
     color: white;
     height: 40px;
     width: 40px;
+    outline: none;
+}
+
+.sm-text {
+    font-size: 15px;
 }
 
 .round {

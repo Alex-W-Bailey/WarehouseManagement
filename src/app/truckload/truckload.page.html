@@ -10,7 +10,7 @@
       <div id="truckInfo">
         <div class="truckloadIDSection purple center shadow">
           <div class="truckInfo">
-            <h1 class="md-text white-text m-0">Order ID</h1>
+            <h1 class="md-text white-text m-0 sm-text">Order ID</h1>
             <p id="truckId" class="lg-text white-text m-0 bold">123445</p>
             <button class="newItemBtn"><ion-icon name="add" class="md-text white-text bold" (click)="addNewItem()"></ion-icon></button>
           </div>
@@ -40,7 +40,7 @@
                 <ion-col size="10">
                   <ion-item color="tertiary">
                     <ion-label position="stacked" class="bold">Shipment ID</ion-label>
-                    <ion-input class="bold" placeholder="Type Or Scan" id="itemBarcode" [(ngModel)]="pro_number">
+                    <ion-input class="bold" placeholder="Type Or Scan (OPTIONAL)" id="itemBarcode" [(ngModel)]="pro_number">
                     </ion-input>
                   </ion-item>
                 </ion-col>
@@ -50,11 +50,6 @@
                   </button>
                 </ion-col>
               </ion-row>
-              <div class="section-end-btn">
-                <div id="error-section" class="error-section hide">
-                  <p id="error-text" class="error-text">Shipment ID Required!</p>
-                </div>
-              </div>
             </div>
           </div>
         </div>

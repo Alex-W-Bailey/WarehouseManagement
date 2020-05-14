@@ -55,6 +55,7 @@ export class TruckItemPage implements OnInit {
       var text = this.renderer.createElement("p");
       this.renderer.addClass(text, "white-text");
       this.renderer.addClass(text, "bold");
+      this.renderer.addClass(text, "m-0");
       text.innerHTML = "No images...";
 
       imgSection.appendChild(text);

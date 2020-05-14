@@ -79,7 +79,9 @@ export class FtlUploadPage implements OnInit {
 
     console.log(this.startedTruckId);
 
-    if (this.startedTruckId) {
+    var isValUndefined = this.startedTruckId === "undefined";
+
+    if (this.startedTruckId && isValUndefined == false) {
       var truckInfo = document.getElementById("truckInfo-main");
 
       var truckTimestampSplit = this.startedTruckTime.split(" ");

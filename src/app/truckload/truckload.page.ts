@@ -121,18 +121,24 @@ export class TruckloadPage implements OnInit {
   }
 
   async truckItemClick(evt) {
-    var id = evt.target.id;
-    console.log("clicked " + id);
-    console.log(id);
+    console.log(GlobalConstants.clickedItem);
 
-    const modal = this.modalCtrl.create({
-      component: TruckItemPage,
-      componentProps: {
-        id: id,
-      }
-    });
+    if(GlobalConstants.clickedItem == false) {
+      var id = evt.target.id;
+      console.log("clicked " + id);
+      console.log(id);
+  
+      GlobalConstants.clickedItem = true;
 
-    return (await modal).present();
+      const modal = this.modalCtrl.create({
+        component: TruckItemPage,
+        componentProps: {
+          id: id,
+        }
+      });
+
+      return (await modal).present();
+    }
   }
 
   async addNewItem() {
@@ -253,6 +259,16 @@ export class TruckloadPage implements OnInit {
     clearTimeout(this.timer);
   }
 
+  async completeTruck() {
+    var nullVal = null;
+    
+    await Storage.set({
+      key: "catalog_truckloadsID",
+      value: undefined
+    });
+
+    window.location.href = "/ftl-upload";
+  }
 
   async showModal(imgClicked) {
     var id = imgClicked.id;

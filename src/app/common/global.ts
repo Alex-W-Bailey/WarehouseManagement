@@ -5,7 +5,7 @@ export class GlobalConstants {
 
   public static truckItems: any[] = [];
   public static allImgs: any[] = [];
-
+  public static clickedItem: boolean = false;
 
   /*
     truckItems should look like this:

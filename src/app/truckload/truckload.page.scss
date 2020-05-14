@@ -55,7 +55,8 @@
 
 .truckloadIDSection {
     width: 100%;
-    height: 160px;
+    min-height: 160px;
+    height: auto;
     margin: auto;
     border-radius: 5px;
 }

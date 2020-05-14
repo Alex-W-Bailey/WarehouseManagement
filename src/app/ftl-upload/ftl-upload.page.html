@@ -27,10 +27,20 @@
         </div>
       </div>
       <div id="newTruckSection" class="hide">
-        <ion-item style="width: 90%; margin: auto;">
-          <ion-label position="stacked" class="bold">Truckload ID</ion-label>
-          <ion-input class="bold" placeholder="Enter Truckload ID" [(ngModel)]="truckID"></ion-input>
-        </ion-item>
+        <ion-row>
+          <ion-col size="10">
+            <ion-item>
+              <ion-label position="stacked" class="bold">Order ID</ion-label>
+              <ion-input class="bold" placeholder="Type Or Scan" id="itemBarcode" [(ngModel)]="order_id">
+              </ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col size="2">
+            <button class="sec-btn round input-btn dark" (click)="goToBarcodeScan()">
+              <ion-icon name="barcode-outline" class="btn-icon"></ion-icon>
+            </button>
+          </ion-col>
+        </ion-row>
         <button class="small-round-btn white-text bold small-text" (click)="cancel()">Cancel</button>
         <button class="small-round-btn white-text bold small-text" (click)="startNewTruck()">Start Truck</button>
       </div>

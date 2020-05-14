@@ -19,6 +19,8 @@ export class FtlUploadPage implements OnInit {
   truckID: string = "";
   startedTruckId: string = "";
   startedTruckTime: string = "";
+  scannedData: any = "";
+  order_id: any = "";
 
   constructor(private barcodeCtrl: BarcodeScanner, private camera: Camera, private renderer: Renderer2, private modalCtrl: ModalController) { }
 
@@ -40,7 +42,8 @@ export class FtlUploadPage implements OnInit {
     await this.saveTruckloadID(truckID);
     await this.saveTruckloadStart();
 
-    window.location.href = `/truckload/${truckID}`;
+    window.location.href = `/truckload/${this.order_id}`;
+    this.order_id = "";
   }
 
   async saveTruckloadID(truckID) {
@@ -132,13 +135,37 @@ export class FtlUploadPage implements OnInit {
     }
     else {
       var createNewTruckSection = document.getElementById("truckSection");
-      createNewTruckSection.classList.remove("hide");    
+      createNewTruckSection.classList.remove("hide");
+      this.order_id = "";    
     }
+  }
+
+  goToBarcodeScan() {
+    const options: BarcodeScannerOptions = {
+      preferFrontCamera: false,
+      showFlipCameraButton: true,
+      showTorchButton: true,
+      torchOn: false,
+      prompt: 'Place a barcode inside the scan area',
+      resultDisplayDuration: 500,
+      formats: 'PDF_417,CODABAR,EAN_8,UPC_A,UPC_E,EAN_8,EAN_13,CODE_39,CODE_93,CODE_128,',
+      orientation: 'portrait'
+    };
+
+    this.barcodeCtrl.scan(options).then(barcodeData => {
+      this.scannedData = barcodeData.text;
+      var barcodeElement = (<HTMLInputElement>document.getElementById("itemBarcode"));
+      barcodeElement.value = this.scannedData;
+
+      this.order_id = this.scannedData;
+    }).catch(err => {
+      alert(err);
+    });
   }
 
   async getTruckId() {
     const { value } = await Storage.get({ key: "catalog_truckloadsID" });
-    this.startedTruckId = value;
+    this.order_id = value;
   }
 
   async getTruckTime() {

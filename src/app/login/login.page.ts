@@ -27,8 +27,6 @@ export class LoginPage implements OnInit {
   async checkAutoLogin() {
     await this.getRememberedLoginInfo();
 
-    console.log("is login remembered: " + this.isLoginInfoRemembered);
-
     if (this.isLoginInfoRemembered === true) {
       this.attemptRememberedLogin();
     }
@@ -58,8 +56,6 @@ export class LoginPage implements OnInit {
 
 
   attemptLogin(username, password, autoLoginVal) {
-    console.log("username: ", username + " password: ", password);
-
     if (username === "" || username == undefined) {
       this.showError("username", "Username Is Required!");
     }
@@ -95,12 +91,10 @@ export class LoginPage implements OnInit {
   async checkToSaveInfo(userInfo, autoLogin) {
     if(autoLogin == false) {
       if (this.toggledRememberLogin ==   true) {
-        console.log(userInfo);
         this.setLoginInfo("true", userInfo);
       }
       else {
         this.setLoginInfo("false", "");
-        console.log("don't remember");
       }
     }
   }
@@ -158,8 +152,6 @@ export class LoginPage implements OnInit {
   }
 
   async setLoginInfo(saveLogin, userToSave) {
-    console.log(userToSave);
-
     await this.setRememberLogin(saveLogin);
     await this.saveLoginInfo(userToSave);
   }
@@ -186,7 +178,6 @@ export class LoginPage implements OnInit {
 
   async getRememberedLoginInfo() {
     const { value } = await Storage.get({ key: "catalog_remember_login" });
-    console.log("saved value: " + value);
 
     if (value == "true") {
       this.isLoginInfoRemembered = true;

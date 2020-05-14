@@ -60,8 +60,6 @@ export class FtlUploadPage implements OnInit {
     var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
     var dateTime = date + ' ' + time;
 
-    console.log("time: " + dateTime);
-
     await Storage.set({
       key: "catalog_truckstart",
       value: dateTime
@@ -79,8 +77,6 @@ export class FtlUploadPage implements OnInit {
   async checkForStartedTruck() {
     await this.getTruckId();
     await this.getTruckTime();
-
-    console.log(this.startedTruckId);
 
     var isValUndefined = this.startedTruckId === "undefined";
 

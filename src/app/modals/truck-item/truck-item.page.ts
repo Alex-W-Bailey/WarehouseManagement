@@ -43,7 +43,6 @@ export class TruckItemPage implements OnInit {
 
     if(thisItemInfo.imgs.length > 0) {
       for(var i = 0; i < thisItemInfo.imgs.length; i++) {
-        console.log("grabbing img...");
         var newImg = this.renderer.createElement("img");
         this.renderer.addClass(newImg, "item-img");
         this.renderer.setProperty(newImg, "src", thisItemInfo.imgs[i]);
@@ -60,9 +59,6 @@ export class TruckItemPage implements OnInit {
 
       imgSection.appendChild(text);
     }
-
-    console.log(allShipmentItems);
-    console.log(thisItemInfo.imgs);
   }
 
   goBack() {

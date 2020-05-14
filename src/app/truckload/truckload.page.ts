@@ -66,67 +66,65 @@ export class TruckloadPage implements OnInit {
 
   async getTruckItems() {
     const { value } = await Storage.get({ key: "catalog_truckItems" });
-    this.truckItems = JSON.parse(value)
+    
+    if(value !== "undefined") {
+      this.truckItems = JSON.parse(value)
 
-    var numOfItemsText = document.getElementById("numOfItems");
-    numOfItemsText.innerHTML = this.truckItems.length;
-
-    var allTruckItems = document.getElementById("allTruckItems");
-    allTruckItems.innerHTML = "";
-
-    for(var i = 0; i < this.truckItems.length; i++) {
-      var splitTime = this.truckItems[i].time.split(":");
-      var hrs = splitTime[0];
-      var mins = splitTime[1];
-
-      var combined = hrs + "" + mins;
-
-      var hours24 = parseInt(combined.substring(0, 2),10);
-      var hours = ((hours24 + 11) % 12) + 1;
-      var amPm = hours24 > 11 ? 'pm' : 'am';
-
-      var truckItem = this.renderer.createElement("div");
-      truckItem.classList.add("truckItem");
-      this.renderer.setProperty(truckItem, "id", i);
-      this.renderer.setAttribute(truckItem, "name", "truck-item");
-      var container = this.renderer.createElement("div");
-      container.classList.add("container");
-      var itemName = this.renderer.createElement("p");
-      this.renderer.setProperty(itemName, "id", i);
-      this.renderer.setAttribute(itemName, "name", "truck-item");
-      itemName.classList.add("m-0");
-      itemName.classList.add("itemName");
-      itemName.classList.add("bold");
-      itemName.innerHTML = this.truckItems[i].id;
-      var itemTime = this.renderer.createElement("p");
-      this.renderer.setProperty(itemTime, "id", i);
-      this.renderer.setAttribute(itemTime, "name", "truck-item");
-      itemTime.classList.add("m-0");
-      itemTime.classList.add("itemTime");
-      itemTime.innerHTML = "loaded at " + hours + ":" + mins + amPm;
-
-      container.appendChild(itemName);
-      container.appendChild(itemTime);
-      truckItem.appendChild(container);
-      allTruckItems.appendChild(truckItem);
-    }
-
-    var truckItemElements = document.getElementsByName("truck-item");
-    console.log(truckItemElements.length);
-    for(var i = 0; i < truckItemElements.length; i++) {
-      truckItemElements[i].addEventListener("click", (evt) => {
-        this.truckItemClick(evt);
-      });
+      var numOfItemsText = document.getElementById("numOfItems");
+      numOfItemsText.innerHTML = this.truckItems.length;
+  
+      var allTruckItems = document.getElementById("allTruckItems");
+      allTruckItems.innerHTML = "";
+  
+      for(var i = 0; i < this.truckItems.length; i++) {
+        var splitTime = this.truckItems[i].time.split(":");
+        var hrs = splitTime[0];
+        var mins = splitTime[1];
+  
+        var combined = hrs + "" + mins;
+  
+        var hours24 = parseInt(combined.substring(0, 2),10);
+        var hours = ((hours24 + 11) % 12) + 1;
+        var amPm = hours24 > 11 ? 'pm' : 'am';
+  
+        var truckItem = this.renderer.createElement("div");
+        truckItem.classList.add("truckItem");
+        this.renderer.setProperty(truckItem, "id", i);
+        this.renderer.setAttribute(truckItem, "name", "truck-item");
+        var container = this.renderer.createElement("div");
+        container.classList.add("container");
+        var itemName = this.renderer.createElement("p");
+        this.renderer.setProperty(itemName, "id", i);
+        this.renderer.setAttribute(itemName, "name", "truck-item");
+        itemName.classList.add("m-0");
+        itemName.classList.add("itemName");
+        itemName.classList.add("bold");
+        itemName.innerHTML = this.truckItems[i].id;
+        var itemTime = this.renderer.createElement("p");
+        this.renderer.setProperty(itemTime, "id", i);
+        this.renderer.setAttribute(itemTime, "name", "truck-item");
+        itemTime.classList.add("m-0");
+        itemTime.classList.add("itemTime");
+        itemTime.innerHTML = "loaded at " + hours + ":" + mins + amPm;
+  
+        container.appendChild(itemName);
+        container.appendChild(itemTime);
+        truckItem.appendChild(container);
+        allTruckItems.appendChild(truckItem);
+      }
+  
+      var truckItemElements = document.getElementsByName("truck-item");
+      for(var i = 0; i < truckItemElements.length; i++) {
+        truckItemElements[i].addEventListener("click", (evt) => {
+          this.truckItemClick(evt);
+        });
+      }
     }
   }
 
   async truckItemClick(evt) {
-    console.log(GlobalConstants.clickedItem);
-
     if(GlobalConstants.clickedItem == false) {
       var id = evt.target.id;
-      console.log("clicked " + id);
-      console.log(id);
   
       GlobalConstants.clickedItem = true;
 
@@ -167,9 +165,11 @@ export class TruckloadPage implements OnInit {
     var truckItemsArr = [];
 
     const { value } = await Storage.get({ key:"catalog_truckItems"});
-    var existingData = JSON.parse(value)
+    var isValueUndefined = ( value === "undefined" );
 
-    if(value !== null) {
+    if(value !== null && isValueUndefined === false) {
+      var existingData = JSON.parse(value)
+
       for(var i = 0; i < existingData.length; i++) {
         truckItemsArr.push(existingData[i]);
       }      
@@ -262,12 +262,24 @@ export class TruckloadPage implements OnInit {
   async completeTruck() {
     var nullVal = null;
     
+    await this.resetTruckloadId();
+    await this.resetTruckItems();
+
+    window.location.href = "/ftl-upload";
+  }
+
+  async resetTruckloadId() {
     await Storage.set({
       key: "catalog_truckloadsID",
       value: undefined
     });
+  }
 
-    window.location.href = "/ftl-upload";
+  async resetTruckItems() {
+    await Storage.set({
+      key: "catalog_truckItems",
+      value: undefined
+    });
   }
 
   async showModal(imgClicked) {

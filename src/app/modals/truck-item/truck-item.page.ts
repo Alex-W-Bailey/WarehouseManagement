@@ -2,6 +2,7 @@ import { Component, OnInit, Renderer2, Renderer } from '@angular/core';
 import { NavParams, ModalController } from '@ionic/angular';
 import { Plugins } from '@capacitor/core';
 import { GlobalConstants } from '../../common/global';
+import { ModalpagePage } from '../modalpage/modalpage.page';
 
 const { Storage } = Plugins
 
@@ -19,6 +20,12 @@ export class TruckItemPage implements OnInit {
   async ngOnInit() {
     this.passedId = this.navParams.get("id");
 
+    setInterval(() => {
+      this.getImgs();
+    }, 1000)
+  }
+
+  async getImgs() {
     const { value } = await Storage.get({ key: "catalog_truckItems"});
     const allShipmentItems = JSON.parse(value);
     var thisItemInfo = allShipmentItems[this.passedId]
@@ -28,7 +35,11 @@ export class TruckItemPage implements OnInit {
 
     var splitTime = thisItemInfo.time.split(":");
     var hrs = splitTime[0];
-    var mins = splitTime[1];
+    var mins: any = parseInt(splitTime[1]);
+
+    if(mins < 10) {
+      mins = "0" + mins
+    }
 
     var combined = hrs + "" + mins;
 
@@ -40,14 +51,22 @@ export class TruckItemPage implements OnInit {
     shipmentTime.innerHTML = `Scanned At: ${hours}:${mins}${amPm}`;
 
     var imgSection = document.getElementById("img-section");
+    imgSection.innerHTML = "";
 
     if(thisItemInfo.imgs.length > 0) {
       for(var i = 0; i < thisItemInfo.imgs.length; i++) {
         var newImg = this.renderer.createElement("img");
         this.renderer.addClass(newImg, "item-img");
+        this.renderer.setProperty(newImg, "id", i);
+        this.renderer.setProperty(newImg, "name", "item-img");
         this.renderer.setProperty(newImg, "src", thisItemInfo.imgs[i]);
         
         imgSection.appendChild(newImg);
+      }
+
+      var itemImg = document.getElementsByName("item-img");
+      for(var x = 0; x < itemImg.length; x++) {
+        itemImg[x].addEventListener("click", (evt) => this.showModal(evt));
       }
     }
     else {
@@ -64,5 +83,25 @@ export class TruckItemPage implements OnInit {
   goBack() {
     GlobalConstants.clickedItem = false;
     this.modalCtrl.dismiss();
+  }
+
+  async showModal(imgClicked) {
+    var id = imgClicked.target.id;
+    var img = imgClicked.target.src;
+
+    console.log(id);
+    console.log(imgClicked.target);
+
+    const modal = this.modalCtrl.create({
+      component: ModalpagePage,
+      componentProps: {
+        item_id: this.passedId,
+        img_id: id,
+        img_src: img,
+        deleteFrom: "itemImg"
+      }
+    });
+
+    return (await modal).present();
   }
 }

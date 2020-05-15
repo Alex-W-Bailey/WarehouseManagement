@@ -20,6 +20,20 @@
     text-align: center;
 }
 
+.error-section {
+    text-align: center;
+    margin-top: 10px;
+    border: 5px solid red;
+    background-color: lightcoral;
+    min-height: 50px;
+}
+
+.error-text {
+    color: white;
+    font-family: 'Ubuntu', sans-serif;
+    margin-top: 10px;
+}
+
 .content {
     min-height: 100%;
     height: auto;

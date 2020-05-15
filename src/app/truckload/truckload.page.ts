@@ -34,7 +34,10 @@ export class TruckloadPage implements OnInit {
     truckIdText.innerHTML = truckId;
 
     await this.getTruckItems();
-    await this.timerControl();
+    
+    // this.timer = setInterval(() => {
+    //   this.showImgs();
+    // }, 1000)
   }
 
   goBack() {
@@ -79,8 +82,14 @@ export class TruckloadPage implements OnInit {
       for(var i = 0; i < this.truckItems.length; i++) {
         var splitTime = this.truckItems[i].time.split(":");
         var hrs = splitTime[0];
-        var mins = splitTime[1];
-  
+        var mins: any = parseInt(splitTime[1]);
+
+        console.log(mins);
+
+        if(mins < 10) {
+          mins = "0" + mins
+        }
+
         var combined = hrs + "" + mins;
   
         var hours24 = parseInt(combined.substring(0, 2),10);
@@ -99,7 +108,14 @@ export class TruckloadPage implements OnInit {
         itemName.classList.add("m-0");
         itemName.classList.add("itemName");
         itemName.classList.add("bold");
-        itemName.innerHTML = this.truckItems[i].id;
+
+        if(this.truckItems[i].id == "") {
+          itemName.innerHTML = "Item " + (i + 1);
+        }
+        else {
+          itemName.innerHTML = this.truckItems[i].id;
+        }
+
         var itemTime = this.renderer.createElement("p");
         this.renderer.setProperty(itemTime, "id", i);
         this.renderer.setAttribute(itemTime, "name", "truck-item");
@@ -224,6 +240,8 @@ export class TruckloadPage implements OnInit {
   }
 
   public showImgs() {
+    console.log("showing imgs...");
+
     if (GlobalConstants.allImgs.length === 0) {
       var imgContainer = document.getElementById("imgs");
       imgContainer.innerHTML = "No Images Captured...";
@@ -249,10 +267,6 @@ export class TruckloadPage implements OnInit {
         imgContainer.appendChild(newImg);
       }
     }
-  }
-
-  public timerControl() {
-    this.timer = setTimeout(this.showImgs, 1000);
   }
 
   public timerEnd() {
@@ -300,4 +314,18 @@ export class TruckloadPage implements OnInit {
 
 export function deleteImg(id) {
   GlobalConstants.allImgs.splice(id, 1);
+}
+
+export async function deleteImgFromShipmentItem(itemId, newShipmentObj) {
+  const { value } = await Storage.get({ key: "catalog_truckItems" });
+  const allItems = JSON.parse(value);
+
+  allItems[itemId] = newShipmentObj;
+
+  console.log(allItems);
+
+  await Storage.set({
+    key: "catalog_truckItems",
+    value: JSON.stringify(allItems)
+  });
 }

@@ -22,7 +22,7 @@ export class TruckItemPage implements OnInit {
 
     setInterval(() => {
       this.getImgs();
-    }, 1000)
+    }, 500)
   }
 
   async getImgs() {

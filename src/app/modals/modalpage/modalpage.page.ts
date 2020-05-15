@@ -66,13 +66,7 @@ export class ModalpagePage implements OnInit {
     var thisItem = this.shipmentItems[this.itemId];
     var imgs = thisItem.imgs;
 
-    console.log(thisItem);
-    console.log(imgs);
-
     imgs.splice(this.passId, 1);
-
-    console.log("Deleted img");
-    console.log(thisItem);
 
     deleteImgFromShipmentItem(this.itemId, thisItem);
   }

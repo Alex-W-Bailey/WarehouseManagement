@@ -89,9 +89,6 @@ export class TruckItemPage implements OnInit {
     var id = imgClicked.target.id;
     var img = imgClicked.target.src;
 
-    console.log(id);
-    console.log(imgClicked.target);
-
     const modal = this.modalCtrl.create({
       component: ModalpagePage,
       componentProps: {

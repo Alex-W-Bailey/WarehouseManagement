@@ -34,10 +34,6 @@ export class TruckloadPage implements OnInit {
     truckIdText.innerHTML = truckId;
 
     await this.getTruckItems();
-    
-    // this.timer = setInterval(() => {
-    //   this.showImgs();
-    // }, 1000)
   }
 
   goBack() {
@@ -83,8 +79,6 @@ export class TruckloadPage implements OnInit {
         var splitTime = this.truckItems[i].time.split(":");
         var hrs = splitTime[0];
         var mins: any = parseInt(splitTime[1]);
-
-        console.log(mins);
 
         if(mins < 10) {
           mins = "0" + mins
@@ -240,8 +234,6 @@ export class TruckloadPage implements OnInit {
   }
 
   public showImgs() {
-    console.log("showing imgs...");
-
     if (GlobalConstants.allImgs.length === 0) {
       var imgContainer = document.getElementById("imgs");
       imgContainer.innerHTML = "No Images Captured...";
@@ -321,8 +313,6 @@ export async function deleteImgFromShipmentItem(itemId, newShipmentObj) {
   const allItems = JSON.parse(value);
 
   allItems[itemId] = newShipmentObj;
-
-  console.log(allItems);
 
   await Storage.set({
     key: "catalog_truckItems",

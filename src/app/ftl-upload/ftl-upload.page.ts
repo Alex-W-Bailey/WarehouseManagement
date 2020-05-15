@@ -49,7 +49,7 @@ export class FtlUploadPage implements OnInit {
   async saveTruckloadID(truckID) {
     await Storage.set({
       key: "catalog_truckloadsID",
-      value: truckID
+      value: this.order_id
     });
   }
 
@@ -80,7 +80,12 @@ export class FtlUploadPage implements OnInit {
 
     var isValUndefined = this.startedTruckId === "undefined";
 
+    console.log(this.startedTruckId);
+    console.log(isValUndefined);
+
     if (this.startedTruckId && isValUndefined == false) {
+      console.log("found-truck");
+
       var truckInfo = document.getElementById("truckInfo-main");
 
       var truckTimestampSplit = this.startedTruckTime.split(" ");
@@ -130,6 +135,8 @@ export class FtlUploadPage implements OnInit {
       })
     }
     else {
+      console.log("no truck created..");
+
       var createNewTruckSection = document.getElementById("truckSection");
       createNewTruckSection.classList.remove("hide");
       this.order_id = "";    
@@ -161,7 +168,8 @@ export class FtlUploadPage implements OnInit {
 
   async getTruckId() {
     const { value } = await Storage.get({ key: "catalog_truckloadsID" });
-    this.order_id = value;
+    console.log(value)
+    this.startedTruckId = value;
   }
 
   async getTruckTime() {

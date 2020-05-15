@@ -67,7 +67,7 @@ export class TruckloadPage implements OnInit {
   async getTruckItems() {
     const { value } = await Storage.get({ key: "catalog_truckItems" });
     
-    if(value !== "undefined") {
+    if(value && value !== "undefined") {
       this.truckItems = JSON.parse(value)
 
       var numOfItemsText = document.getElementById("numOfItems");

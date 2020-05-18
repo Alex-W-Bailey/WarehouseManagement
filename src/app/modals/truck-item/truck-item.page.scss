@@ -26,8 +26,23 @@
     margin-left: 60px;
 }
 
+.newItemBtn {
+    height: 40px;
+    width: 40px;
+    border-radius: 25px;
+    float: right;
+    margin-right: 10px;
+    margin-top: 3px;
+    background-color: #ff4961;
+    outline: none;
+}
+
 .white-text {
     color: white;
+}
+
+.red {
+    background-color: #ff4961;
 }
 
 .m-0 {
@@ -50,6 +65,10 @@
     font-size: 40px;
 }
 
+.inline {
+    display: inline;
+}
+
 .center {
     text-align: center;
 }
@@ -57,6 +76,12 @@
 .item-img {
     height: 200px;
     width: 250px;
+    // float: left;
+    margin-top: 10px;
+}
+
+.img-section {
+    height: auto;
 }
 
 .section-title {

@@ -1,8 +1,10 @@
 import { Component, OnInit, Renderer2, Renderer } from '@angular/core';
+import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { NavParams, ModalController } from '@ionic/angular';
 import { Plugins } from '@capacitor/core';
 import { GlobalConstants } from '../../common/global';
 import { ModalpagePage } from '../modalpage/modalpage.page';
+import { async } from '@angular/core/testing';
 
 const { Storage } = Plugins
 
@@ -13,7 +15,7 @@ const { Storage } = Plugins
 })
 export class TruckItemPage implements OnInit {
 
-  constructor(private navParams: NavParams, private renderer: Renderer2, private modalCtrl: ModalController) { }
+  constructor(private navParams: NavParams, private renderer: Renderer2, private modalCtrl: ModalController, private camera: Camera) { }
 
   passedId = null;
 
@@ -37,9 +39,13 @@ export class TruckItemPage implements OnInit {
   }
 
   async getImgs() {
+    console.log("getImgs...");
+
     const { value } = await Storage.get({ key: "catalog_truckItems" });
     const allShipmentItems = JSON.parse(value);
     var thisItemInfo = allShipmentItems[this.passedId]
+
+    console.log(thisItemInfo);
 
     var shipmentId = document.getElementById("shipmentId");
     shipmentId.innerHTML = thisItemInfo.id;
@@ -50,11 +56,13 @@ export class TruckItemPage implements OnInit {
     var hours: any = 0;
     var amPm: string = "";
 
+    var combined = hrs + "" + mins;
+
     if (mins < 10) {
       mins = "0" + mins
     }
 
-    if (hrs < 11) {
+    if (hrs < 12) {
       hours = hrs;
       amPm = "am";
     }
@@ -63,10 +71,6 @@ export class TruckItemPage implements OnInit {
       hours = ((hours24 + 11) % 12) + 1;
       amPm = "pm"
     }
-
-    var combined = hrs + "" + mins;
-
-    console.log(hours);
 
     var shipmentTime = document.getElementById("shipmentTime");
     shipmentTime.innerHTML = `Scanned At: ${hours}:${mins}${amPm}`;
@@ -99,6 +103,45 @@ export class TruckItemPage implements OnInit {
 
       imgSection.appendChild(text);
     }
+  }
+
+  takePicture() {
+    const options: CameraOptions = {
+      quality: 75,
+      targetHeight: 480,
+      targetWidth: 640,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE,
+      correctOrientation: true,
+    }
+
+    this.camera.getPicture(options).then( async (imgData) => {
+      var base64Image = "data:image/jpeg;base64," + imgData;
+
+      const { value } = await Storage.get({ key: "catalog_truckItems" });
+      const allShipmentItems = JSON.parse(value);
+      var itemImgs = allShipmentItems[this.passedId].imgs;
+
+      console.log("BEFORE");
+      console.log(itemImgs);
+
+      itemImgs.push(base64Image);
+
+      console.log("AFTER");
+      console.log(allShipmentItems);
+
+      var data = JSON.stringify(allShipmentItems);
+
+      await Storage.set({
+        key: "catalog_truckItems",
+        value: data
+      })
+
+      this.getImgs();
+    }, (err) => {
+      alert(err);
+    });
   }
 
   goBack() {

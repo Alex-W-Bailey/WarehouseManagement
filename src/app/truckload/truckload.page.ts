@@ -82,11 +82,13 @@ export class TruckloadPage implements OnInit {
         var hours: any = 0;
         var amPm: string = "";
 
+        var combined = hrs + "" + mins;
+
         if(mins < 10) {
           mins = "0" + mins
         }
 
-        if (hrs < 11) {
+        if (hrs < 12) {
           hours = hrs;
           amPm = "am";
         }
@@ -95,8 +97,6 @@ export class TruckloadPage implements OnInit {
           hours = ((hours24 + 11) % 12) + 1;
           amPm = "pm"
         }
-
-        var combined = hrs + "" + mins;
   
         var truckItem = this.renderer.createElement("div");
         truckItem.classList.add("truckItem");

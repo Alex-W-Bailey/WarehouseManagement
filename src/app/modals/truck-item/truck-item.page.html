@@ -17,10 +17,11 @@
     <div class="item-section">
       <div class="container">
         <div class="section-title purple center sm-round">
-          <p class="title-text-sm white-text md-text m-0 bold"><ion-icon name="images" class="white-text title-icon"></ion-icon>Shipment Images</p>
+          <p class="title-text-sm white-text md-text m-0 bold inline"><ion-icon name="images" class="white-text title-icon"></ion-icon>Shipment Images</p>
         </div>
         <div class="section-content center">
-          <div id="img-section" class="container">
+          <button class="newItemBtn"><ion-icon name="add" class="md-text white-text bold" (click)="takePicture()"></ion-icon></button>
+          <div id="img-section" class="img-section container">
           </div>
         </div>
       </div>

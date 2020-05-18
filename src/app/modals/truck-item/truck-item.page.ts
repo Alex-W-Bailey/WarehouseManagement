@@ -30,14 +30,14 @@ export class TruckItemPage implements OnInit {
   async checkForImgDeletion() {
     var wasImgDeleted = GlobalConstants.deletedImg;
 
-    if(wasImgDeleted) {
+    if (wasImgDeleted) {
       this.getImgs();
       GlobalConstants.deletedImg = false;
     }
   }
 
   async getImgs() {
-    const { value } = await Storage.get({ key: "catalog_truckItems"});
+    const { value } = await Storage.get({ key: "catalog_truckItems" });
     const allShipmentItems = JSON.parse(value);
     var thisItemInfo = allShipmentItems[this.passedId]
 
@@ -45,18 +45,28 @@ export class TruckItemPage implements OnInit {
     shipmentId.innerHTML = thisItemInfo.id;
 
     var splitTime = thisItemInfo.time.split(":");
-    var hrs = splitTime[0];
+    var hrs: any = parseInt(splitTime[0]);
     var mins: any = parseInt(splitTime[1]);
+    var hours: any = 0;
+    var amPm: string = "";
 
-    if(mins < 10) {
+    if (mins < 10) {
       mins = "0" + mins
+    }
+
+    if (hrs < 11) {
+      hours = hrs;
+      amPm = "am";
+    }
+    else {
+      var hours24 = parseInt(combined.substring(0, 2), 10);
+      hours = ((hours24 + 11) % 12) + 1;
+      amPm = "pm"
     }
 
     var combined = hrs + "" + mins;
 
-    var hours24 = parseInt(combined.substring(0, 2),10);
-    var hours = ((hours24 + 11) % 12) + 1;
-    var amPm = hours24 > 11 ? 'pm' : 'am';
+    console.log(hours);
 
     var shipmentTime = document.getElementById("shipmentTime");
     shipmentTime.innerHTML = `Scanned At: ${hours}:${mins}${amPm}`;
@@ -64,19 +74,19 @@ export class TruckItemPage implements OnInit {
     var imgSection = document.getElementById("img-section");
     imgSection.innerHTML = "";
 
-    if(thisItemInfo.imgs.length > 0) {
-      for(var i = 0; i < thisItemInfo.imgs.length; i++) {
+    if (thisItemInfo.imgs.length > 0) {
+      for (var i = 0; i < thisItemInfo.imgs.length; i++) {
         var newImg = this.renderer.createElement("img");
         this.renderer.addClass(newImg, "item-img");
         this.renderer.setProperty(newImg, "id", i);
         this.renderer.setProperty(newImg, "name", "item-img");
         this.renderer.setProperty(newImg, "src", thisItemInfo.imgs[i]);
-        
+
         imgSection.appendChild(newImg);
       }
 
       var itemImg = document.getElementsByName("item-img");
-      for(var x = 0; x < itemImg.length; x++) {
+      for (var x = 0; x < itemImg.length; x++) {
         itemImg[x].addEventListener("click", (evt) => this.showModal(evt));
       }
     }

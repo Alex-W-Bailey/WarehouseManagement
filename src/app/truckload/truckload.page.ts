@@ -79,16 +79,24 @@ export class TruckloadPage implements OnInit {
         var splitTime = this.truckItems[i].time.split(":");
         var hrs = splitTime[0];
         var mins: any = parseInt(splitTime[1]);
+        var hours: any = 0;
+        var amPm: string = "";
 
         if(mins < 10) {
           mins = "0" + mins
         }
 
+        if (hrs < 11) {
+          hours = hrs;
+          amPm = "am";
+        }
+        else {
+          var hours24 = parseInt(combined.substring(0, 2), 10);
+          hours = ((hours24 + 11) % 12) + 1;
+          amPm = "pm"
+        }
+
         var combined = hrs + "" + mins;
-  
-        var hours24 = parseInt(combined.substring(0, 2),10);
-        var hours = ((hours24 + 11) % 12) + 1;
-        var amPm = hours24 > 11 ? 'pm' : 'am';
   
         var truckItem = this.renderer.createElement("div");
         truckItem.classList.add("truckItem");
@@ -304,8 +312,34 @@ export class TruckloadPage implements OnInit {
   }
 }
 
-export function deleteImg(id) {
+export function deleteImg(id, renderer) {
   GlobalConstants.allImgs.splice(id, 1);
+
+  if (GlobalConstants.allImgs.length === 0) {
+    var imgContainer = document.getElementById("imgs");
+    imgContainer.innerHTML = "No Images Captured...";
+  }
+  else {
+    var imgContainer = document.getElementById("imgs");
+    imgContainer.innerHTML = "";
+
+    var numOfImages: number[] = [];
+    var num: number = 0;
+
+    for (var i = 0; i < GlobalConstants.allImgs.length; i++) {
+      numOfImages.push(num);
+      num++;
+
+      const newImg = this.renderer.createElement('img');
+      renderer.addClass(newImg, "item-img");
+      renderer.addClass(newImg, "inline");
+      renderer.setProperty(newImg, "id", numOfImages[i]);
+      renderer.setProperty(newImg, 'src', GlobalConstants.allImgs[i]);
+
+      newImg.addEventListener("click", () => this.showModal(newImg));
+      imgContainer.appendChild(newImg);
+    }
+  }
 }
 
 export async function deleteImgFromShipmentItem(itemId, newShipmentObj) {

@@ -98,14 +98,26 @@ export class FtlUploadPage implements OnInit {
       var formattedTruckDate = truckMonth + "/" + truckDay + "/" + truckYear
 
       var splitTime = truckTime.split(":");
-      var hrs = splitTime[0];
-      var mins = splitTime[1];
+      var hrs: any = parseInt(splitTime[0]);
+      var mins: any = parseInt(splitTime[1]);
+      var hours: any = 0;
+      var amPm: string = "";
+
+      if(mins < 10) {
+        mins = "0" + mins
+      }
+
+      if (hrs < 11) {
+        hours = hrs;
+        amPm = "am";
+      }
+      else {
+        var hours24 = parseInt(combined.substring(0, 2), 10);
+        hours = ((hours24 + 11) % 12) + 1;
+        amPm = "pm"
+      }
 
       var combined = hrs + "" + mins;
-
-      var hours24 = parseInt(combined.substring(0, 2), 10);
-      var hours = ((hours24 + 11) % 12) + 1;
-      var amPm = hours24 > 11 ? 'pm' : 'am';
 
       var truckContent = this.renderer.createElement("div");
       truckContent.classList.add("truckContent");
@@ -168,7 +180,6 @@ export class FtlUploadPage implements OnInit {
 
   async getTruckId() {
     const { value } = await Storage.get({ key: "catalog_truckloadsID" });
-    console.log(value)
     this.startedTruckId = value;
   }
 

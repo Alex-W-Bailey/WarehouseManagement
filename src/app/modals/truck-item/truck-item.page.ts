@@ -39,14 +39,9 @@ export class TruckItemPage implements OnInit {
   }
 
   async getImgs() {
-    console.log("getImgs...");
-
     const { value } = await Storage.get({ key: "catalog_truckItems" });
     const allShipmentItems = JSON.parse(value);
     var thisItemInfo = allShipmentItems[this.passedId]
-
-    console.log(thisItemInfo);
-
     var shipmentId = document.getElementById("shipmentId");
     shipmentId.innerHTML = thisItemInfo.id;
 
@@ -123,13 +118,7 @@ export class TruckItemPage implements OnInit {
       const allShipmentItems = JSON.parse(value);
       var itemImgs = allShipmentItems[this.passedId].imgs;
 
-      console.log("BEFORE");
-      console.log(itemImgs);
-
       itemImgs.push(base64Image);
-
-      console.log("AFTER");
-      console.log(allShipmentItems);
 
       var data = JSON.stringify(allShipmentItems);
 

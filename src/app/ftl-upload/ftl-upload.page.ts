@@ -80,12 +80,7 @@ export class FtlUploadPage implements OnInit {
 
     var isValUndefined = this.startedTruckId === "undefined";
 
-    console.log(this.startedTruckId);
-    console.log(isValUndefined);
-
     if (this.startedTruckId && isValUndefined == false) {
-      console.log("found-truck");
-
       var truckInfo = document.getElementById("truckInfo-main");
 
       var truckTimestampSplit = this.startedTruckTime.split(" ");
@@ -147,8 +142,6 @@ export class FtlUploadPage implements OnInit {
       })
     }
     else {
-      console.log("no truck created..");
-
       var createNewTruckSection = document.getElementById("truckSection");
       createNewTruckSection.classList.remove("hide");
       this.order_id = "";    

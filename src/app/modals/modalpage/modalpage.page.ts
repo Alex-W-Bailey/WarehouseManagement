@@ -3,6 +3,7 @@ import { NavParams } from '@ionic/angular';
 import { ModalController, AngularDelegate } from '@ionic/angular';
 import { deleteImg, deleteImgFromShipmentItem } from '../../truckload/truckload.page';
 import { Plugins } from '@capacitor/core';
+import { GlobalConstants } from '../../common/global';
 
 const { Storage } = Plugins;
 
@@ -67,6 +68,8 @@ export class ModalpagePage implements OnInit {
     var imgs = thisItem.imgs;
 
     imgs.splice(this.passId, 1);
+
+    GlobalConstants.deletedImg = true;
 
     deleteImgFromShipmentItem(this.itemId, thisItem);
   }

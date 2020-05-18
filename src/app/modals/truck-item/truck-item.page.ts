@@ -20,9 +20,20 @@ export class TruckItemPage implements OnInit {
   async ngOnInit() {
     this.passedId = this.navParams.get("id");
 
+    this.getImgs();
+
     setInterval(() => {
-      this.getImgs();
+      this.checkForImgDeletion();
     }, 500)
+  }
+
+  async checkForImgDeletion() {
+    var wasImgDeleted = GlobalConstants.deletedImg;
+
+    if(wasImgDeleted) {
+      this.getImgs();
+      GlobalConstants.deletedImg = false;
+    }
   }
 
   async getImgs() {

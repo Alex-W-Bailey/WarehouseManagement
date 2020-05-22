@@ -1,11 +1,16 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-buttons slot="start">
+      <ion-back-button style="float: left;" defaultHref="ftl-upload"></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      <img class="logo-header" src="../../assets/imgs/2x7-FreightSnap-Logo-Stickers.jpg" />
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
 <ion-content>
   <div class="content">
-    <div class="header">
-      <ion-back-button style="float: left;" (click)="goBack()" defaultHref="/ftl-upload" class="white-text"></ion-back-button>
-      <ion-title>
-        <img class="logo-header inline" src="../../assets/imgs/2x7-FreightSnap-Logo-Stickers.jpg" />
-      </ion-title>
-    </div>
     <div class="container">
       <div id="truckInfo">
         <div class="truckloadIDSection purple center shadow">
@@ -82,7 +87,7 @@
 </ion-content>
 
 <ion-footer class="ion-no-border">
-  <ion-toolbar>
+  <ion-toolbar color="dark">
     <div class="footer dark">
       <div class="container">
         <button id="truckDoneBtn" class="truckDone" (click)="completeTruck()">COMPLETE TRUCK</button>

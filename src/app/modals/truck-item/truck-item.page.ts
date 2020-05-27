@@ -80,6 +80,7 @@ export class TruckItemPage implements OnInit {
         this.renderer.setProperty(newImg, "id", i);
         this.renderer.setProperty(newImg, "name", "item-img");
         this.renderer.setProperty(newImg, "src", thisItemInfo.imgs[i]);
+        this.renderer.addClass(newImg, "float-left");
 
         imgSection.appendChild(newImg);
       }

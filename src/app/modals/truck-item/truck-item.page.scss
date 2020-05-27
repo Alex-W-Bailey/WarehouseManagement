@@ -27,14 +27,25 @@
 }
 
 .newItemBtn {
+    position: relative;
+    right: 3px;
+    top: 10px;
+    float: right;
     height: 40px;
     width: 40px;
     border-radius: 25px;
-    float: right;
-    margin-right: 10px;
-    margin-top: 3px;
     background-color: #ff4961;
     outline: none;
+}
+
+.float-left {
+    position: relative;
+    left: 10px;
+    top: 10px;
+}
+
+.left {
+    text-align: left;
 }
 
 .white-text {
@@ -81,6 +92,7 @@
 
 .img-section {
     height: auto;
+    top: 2px;
 }
 
 .section-title {
@@ -106,6 +118,19 @@
     margin-top: 50px;
 }
 
+.font-jost {
+    font-family: 'Jost', sans-serif;
+}
+
+.font-merri {
+    font-family: 'Merriweather Sans', sans-serif;
+}
+
+.title {
+    position: relative;
+    top: 5px;
+}
+
 .title-text {
     padding-top: 12px;
 }
@@ -115,6 +140,8 @@
 }
 
 .title-icon {
+    position: relative;
+    top: 8px;
     margin-right: 10px;
     font-size: 20px;
 }

@@ -9,7 +9,7 @@
           <h1 id="shipmentId" class="white-text m-0 lg-text bold"></h1>
         </div>
         <div class="item-section">
-          <p id="shipmentTime" class="white-text md-text m-0 bold"></p>
+          <p id="shipmentTime" class="white-text md-text m-0 bold font-merri"></p>
         </div>
       </div>
     </div>
@@ -17,12 +17,18 @@
     <div class="item-section">
       <div class="container">
         <div class="section-title purple center sm-round">
-          <p class="title-text-sm white-text md-text m-0 bold inline"><ion-icon name="images" class="white-text title-icon"></ion-icon>Shipment Images</p>
+          <span><ion-icon name="images" class="white-text title-icon"></ion-icon><p class="title-text-sm white-text md-text m-0 bold inline title">Shipment Images</p></span>
         </div>
         <div class="section-content center">
-          <button class="newItemBtn"><ion-icon name="add" class="md-text white-text bold" (click)="takePicture()"></ion-icon></button>
-          <div id="img-section" class="img-section container">
-          </div>
+          <ion-row>
+            <ion-col size="10">
+              <div id="img-section" class="img-section container inline">
+              </div>
+            </ion-col>
+            <ion-col size="2">
+              <button class="newItemBtn inline"><ion-icon name="add" class="md-text white-text bold" (click)="takePicture()"></ion-icon></button>
+            </ion-col>
+          </ion-row>         
         </div>
       </div>
     </div>

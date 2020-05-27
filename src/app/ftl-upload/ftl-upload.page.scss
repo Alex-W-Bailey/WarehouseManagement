@@ -96,11 +96,20 @@
     border: 5px solid black;
 }
 
+.font-jost {
+    font-family: 'Jost', sans-serif;
+}
+
+.font-merri {
+    font-family: 'Merriweather Sans', sans-serif;
+}
+
 .sec-btn {
     background-color: #62ADD4;
     color: white;
-    height: 40px;
-    width: 40px;
+    height: 60px;
+    width: 60px;
+    margin-right: 6px;
     outline: none;
 }
 
@@ -170,6 +179,12 @@
 
 .thick {
     border: 2px solid;
+}
+
+.content-background {
+    padding-top: 3px;
+    background-color: #3a477f;
+    border-radius: 5px;
 }
 
 .red-text {

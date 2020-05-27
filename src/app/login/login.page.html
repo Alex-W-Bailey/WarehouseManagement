@@ -8,12 +8,12 @@
 				<div class="container">
 					<div class="input-content">
 						<ion-item id="ion-username" class="input">
-							<ion-input id="login_username" type="text" placeholder="Username" [(ngModel)]="username">
+							<ion-input class="bold font-jost" id="login_username" type="text" placeholder="Username" [(ngModel)]="username">
 								<ion-icon class="login-icon" name="person-circle-outline"></ion-icon>
 							</ion-input>
 						</ion-item>
 						<ion-item id="ion-password" class="input">
-							<ion-input type="password" placeholder="Password" [(ngModel)]="password"
+							<ion-input class="bold font-jost" type="password" placeholder="Password" [(ngModel)]="password"
 								(keyup.enter)="login()">
 								<ion-icon class="login-icon" name="key-outline"></ion-icon>
 							</ion-input>
@@ -22,7 +22,7 @@
 					<div class="remember-login">
             <ion-row>
               <ion-col size="6">
-                <p style="font-weight: bold; color: white; float: left">Remeber Login?</p>
+                <p class="font-merri" style="font-weight: bold; color: white; float: left">Remeber Login?</p>
               </ion-col>
               <ion-col size="6">
                 <button id="toggleRememberBtn" class="remember-login-btn white-text" (click)="toggleRemember()"><ion-icon name="checkbox"></ion-icon></button>
@@ -33,10 +33,10 @@
 						<p id="error-text" class="error-text"></p>
 					</div>
 					<div style="padding-top: 15px">
-						<p id="register-btn" (click)="register()">Don't Have An Account? Register</p>
+						<p id="register-btn" class="font-merri" (click)="register()">Don't Have An Account? Register</p>
 						<ion-button size="large" expand="block" (click)="login()"
 							style="font-weight: bold;">
-							<p>Login</p>
+							<p>LOGIN</p>
 						</ion-button>
 					</div>
 				</div>

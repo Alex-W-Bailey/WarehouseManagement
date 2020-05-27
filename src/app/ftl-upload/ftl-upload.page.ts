@@ -128,6 +128,7 @@ export class FtlUploadPage implements OnInit {
       truckTimestamp.classList.add("white-text");
       truckTimestamp.classList.add("m-0");
       truckTimestamp.classList.add("inline");
+      truckTimestamp.classList.add("font-jost");
       truckTimestamp.innerHTML = "Truck started at " + hours + ":" + mins + amPm + " " + formattedTruckDate
 
       this.renderer.appendChild(truckContent, truckID);

@@ -123,6 +123,7 @@ export class TruckloadPage implements OnInit {
         this.renderer.setAttribute(itemTime, "name", "truck-item");
         itemTime.classList.add("m-0");
         itemTime.classList.add("itemTime");
+        itemTime.classList.add("font-jost");
         itemTime.innerHTML = "loaded at " + hours + ":" + mins + amPm;
   
         container.appendChild(itemName);
@@ -273,9 +274,7 @@ export class TruckloadPage implements OnInit {
     clearTimeout(this.timer);
   }
 
-  async completeTruck() {
-    var nullVal = null;
-    
+  async completeTruck() {    
     await this.resetTruckloadId();
     await this.resetTruckItems();
 

@@ -314,8 +314,6 @@ export class TruckloadPage implements OnInit {
 export function deleteImg(id, renderer, modalCtrl) {
   GlobalConstants.allImgs.splice(id, 1);
 
-  console.log(GlobalConstants.allImgs)
-
   if (GlobalConstants.allImgs.length === 0) {
     var imgContainer = document.getElementById("imgs");
     imgContainer.innerHTML = "No Images Captured...";

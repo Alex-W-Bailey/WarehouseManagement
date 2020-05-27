@@ -311,8 +311,10 @@ export class TruckloadPage implements OnInit {
   }
 }
 
-export function deleteImg(id, renderer) {
+export function deleteImg(id, renderer, modalCtrl) {
   GlobalConstants.allImgs.splice(id, 1);
+
+  console.log(GlobalConstants.allImgs)
 
   if (GlobalConstants.allImgs.length === 0) {
     var imgContainer = document.getElementById("imgs");
@@ -329,15 +331,30 @@ export function deleteImg(id, renderer) {
       numOfImages.push(num);
       num++;
 
-      const newImg = this.renderer.createElement('img');
-      renderer.addClass(newImg, "item-img");
+      const newImg = renderer.createElement('img');
+      renderer.addClass(newImg, "new-item-img");
       renderer.addClass(newImg, "inline");
       renderer.setProperty(newImg, "id", numOfImages[i]);
       renderer.setProperty(newImg, 'src', GlobalConstants.allImgs[i]);
 
-      newImg.addEventListener("click", () => this.showModal(newImg));
+      newImg.addEventListener("click", () => showModal(newImg));
       imgContainer.appendChild(newImg);
     }
+  }
+
+  async function showModal(imgClicked) {
+    var id = imgClicked.id;
+    var img = imgClicked.src;
+
+    const modal = modalCtrl.create({
+      component: ModalpagePage,
+      componentProps: {
+        img_id: id,
+        img_src: img
+      }
+    });
+
+    return (await modal).present();
   }
 }
 

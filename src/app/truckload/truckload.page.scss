@@ -139,7 +139,6 @@
     margin: 0;
 }
 
-//-------------------------------
 .content-header {
     text-align: center;    
 }
@@ -174,6 +173,12 @@
 .item-img {
     height: 100px;
     width: 100px;
+    margin-left: 10px;
+}
+
+.new-item-img {
+    max-height: 100px;
+    max-width: 100px;
     margin-left: 10px;
 }
 

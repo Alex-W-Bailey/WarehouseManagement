@@ -55,7 +55,7 @@ export class ModalpagePage implements OnInit {
       this.deleteImgFromItem();
     }
     else {
-      deleteImg(this.passId, this.renderer);
+      deleteImg(this.passId, this.renderer, this.modalCtrl);
     }
 
     this.modalCtrl.dismiss();

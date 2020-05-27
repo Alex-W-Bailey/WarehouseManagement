@@ -12,41 +12,45 @@
 <ion-content>
   <div class="content">
     <div class="container">
-      <div class="center">
-        <h1 class="bold dark-text">FTL Upload</h1>
-      </div>
-      <hr class="thick dark"/>
-      <div id="truckSection" class="center hide border">
-        <div class="mb-3 container">
-          <h2>No Truck Started</h2>
-          <button class="round-btn bold md-text dark white-text" (click)="createNewTruck()">Start Truck</button>
-        </div>
-      </div>
-      <div id="startedTruckSection">
-        <div id="main-truck-area" class="truckInfo dark-border hide">
-          <div id="truckInfo-main" class="container">
-          </div>
-        </div>
-      </div>
-      <div id="newTruckSection" class="hide border">
-        <div class="mb-3">
-          <ion-row>
-            <ion-col size="10">
-              <ion-item>
-                <ion-label position="stacked" class="bold">Order ID</ion-label>
-                <ion-input class="bold" placeholder="Type Or Scan" id="itemBarcode" [(ngModel)]="order_id">
-                </ion-input>
-              </ion-item>
-            </ion-col>
-            <ion-col size="2">
-              <button class="sec-btn round input-btn dark center" (click)="goToBarcodeScan()">
-                <ion-icon name="barcode-outline" class="btn-icon"></ion-icon>
-              </button>
-            </ion-col>
-          </ion-row>
+      <div class="tile">
+        <div class="container">
           <div class="center">
-            <button class="small-round-btn white-text bold small-text" (click)="cancel()">Cancel</button>
-            <button class="small-round-btn white-text bold small-text" (click)="startNewTruck()">Start Truck</button>
+            <h1 class="bold dark-text">FTL Upload</h1>
+          </div>
+          <hr class="thick dark"/>
+          <div id="truckSection" class="center hide border">
+            <div class="mb-3 container">
+              <h2>No Truck Started</h2>
+              <button class="round-btn bold md-text dark white-text" (click)="createNewTruck()">Start Truck</button>
+            </div>
+          </div>
+          <div id="startedTruckSection">
+            <div id="main-truck-area" class="truckInfo dark-border hide">
+              <div id="truckInfo-main" class="container">
+              </div>
+            </div>
+          </div>
+          <div id="newTruckSection" class="hide border">
+            <div class="mb-3">
+              <ion-row>
+                <ion-col size="9">
+                  <ion-item color="warning">
+                    <ion-label position="stacked" class="bold white-text">Order ID</ion-label>
+                    <ion-input class="white-text" placeholder="Type Or Scan" id="itemBarcode" [(ngModel)]="order_id">
+                    </ion-input>
+                  </ion-item>
+                </ion-col>
+                <ion-col size="3">
+                  <button class="sec-btn round input-btn dark center" (click)="goToBarcodeScan()">
+                    <ion-icon name="barcode-outline" class="btn-icon"></ion-icon>
+                  </button>
+                </ion-col>
+              </ion-row>
+              <div class="center">
+                <button class="small-round-btn white-text bold small-text" (click)="cancel()">Cancel</button>
+                <button class="small-round-btn white-text bold small-text" (click)="startNewTruck()">Start Truck</button>
+              </div>
+            </div>
           </div>
         </div>
       </div>

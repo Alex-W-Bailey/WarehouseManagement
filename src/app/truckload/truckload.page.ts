@@ -67,7 +67,7 @@ export class TruckloadPage implements OnInit {
     const { value } = await Storage.get({ key: "catalog_truckItems" });
     
     if(value && value !== "undefined") {
-      this.truckItems = JSON.parse(value)
+      this.truckItems = JSON.parse(value);
 
       var numOfItemsText = document.getElementById("numOfItems");
       numOfItemsText.innerHTML = this.truckItems.length;
@@ -85,7 +85,7 @@ export class TruckloadPage implements OnInit {
         var combined = hrs + "" + mins;
 
         if(mins < 10) {
-          mins = "0" + mins
+          mins = "0" + mins;
         }
 
         if (hrs < 12) {
@@ -95,7 +95,7 @@ export class TruckloadPage implements OnInit {
         else {
           var hours24 = parseInt(combined.substring(0, 2), 10);
           hours = ((hours24 + 11) % 12) + 1;
-          amPm = "pm"
+          amPm = "pm";
         }
   
         var truckItem = this.renderer.createElement("div");
@@ -187,7 +187,7 @@ export class TruckloadPage implements OnInit {
     var isValueUndefined = ( value === "undefined" );
 
     if(value !== null && isValueUndefined === false) {
-      var existingData = JSON.parse(value)
+      var existingData = JSON.parse(value);
 
       for(var i = 0; i < existingData.length; i++) {
         truckItemsArr.push(existingData[i]);
@@ -234,7 +234,7 @@ export class TruckloadPage implements OnInit {
 
     this.camera.getPicture(options).then((imgData) => {
       var base64Image = "data:image/jpeg;base64," + imgData;
-      GlobalConstants.allImgs.push(base64Image)
+      GlobalConstants.allImgs.push(base64Image);
 
       this.showImgs();
     }, (err) => {

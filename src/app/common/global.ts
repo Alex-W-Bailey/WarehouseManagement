@@ -7,19 +7,4 @@ export class GlobalConstants {
   public static allImgs: any[] = [];
   public static clickedItem: boolean = false;
   public static deletedImg: boolean = false;
-
-  /*
-    truckItems should look like this:
-
-    [
-      {
-        id: 12345,
-        time: 10:25,
-        imgs: [],
-      }
-    ]
-
-    create an object with id of the shipment, a timestamp and imgs then push to the 
-    truck items arr
-  */
 }

@@ -33,7 +33,7 @@ export class ModalpagePage implements OnInit {
 
   showImg(base64Img) {
     var titleElement = document.getElementById("img_num");
-    var newTitle = "Image Number: " + this.passId;
+    var newTitle = "Image Number: " + (parseInt(this.passId) + 1);
     titleElement.innerHTML = newTitle;
 
     var imgContainer = document.getElementById("opened_img");

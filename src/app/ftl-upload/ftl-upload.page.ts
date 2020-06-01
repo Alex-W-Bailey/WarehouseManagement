@@ -42,7 +42,7 @@ export class FtlUploadPage implements OnInit {
     await this.saveTruckloadID(truckID);
     await this.saveTruckloadStart();
 
-    window.location.href = `/truckload/${this.order_id}`;
+    window.location.href = `/single-truck/${this.order_id}`;
     this.order_id = "";
   }
 
@@ -139,7 +139,7 @@ export class FtlUploadPage implements OnInit {
       truck.classList.remove("hide");
 
       truckInfo.addEventListener("click", (evt) => {
-        window.location.href = `/truckload/${this.startedTruckId}`;
+        window.location.href = `/single-truck/${this.startedTruckId}`;
       })
     }
     else {

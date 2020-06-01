@@ -3,11 +3,12 @@ import { GlobalConstants } from '../common/global';
 import { BarcodeScanner, BarcodeScannerOptions } from "@ionic-native/barcode-scanner/ngx";
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { interval } from 'rxjs';
-import { ModalController } from '@ionic/angular';
+import { ModalController, AlertController } from '@ionic/angular';
 import { Plugins } from '@capacitor/core';
 
 import { ModalpagePage } from '../modals/modalpage/modalpage.page';
 import { TruckItemPage } from '../modals/truck-item/truck-item.page';
+import { async } from '@angular/core/testing';
 
 const { Storage } = Plugins;
 
@@ -18,7 +19,7 @@ const { Storage } = Plugins;
 })
 export class TruckloadPage implements OnInit {
 
-  constructor(private barcodeCtrl: BarcodeScanner, private camera: Camera, private renderer: Renderer2, private modalCtrl: ModalController) { }
+  constructor(private barcodeCtrl: BarcodeScanner, private camera: Camera, private renderer: Renderer2, private modalCtrl: ModalController, public alertCtrl: AlertController) { }
 
   truckItems: any;
   pro_number: string = "";
@@ -275,8 +276,25 @@ export class TruckloadPage implements OnInit {
   }
 
   async completeTruck() {    
-    await this.resetTruckloadId();
-    await this.resetTruckItems();
+    var alert = await this.alertCtrl.create({
+      message: "Are you sure this truck is complete?",
+      buttons: [
+        {
+          text: "YES",
+          handler: async () => {
+            await this.resetTruckloadId();
+            await this.resetTruckItems();
+          }
+        },
+        {
+          text: "CANCEL",
+          handler: async() => {
+            await alert.dismiss();
+          }
+        }
+    ]
+    })
+
 
     window.location.href = "/ftl-upload";
   }

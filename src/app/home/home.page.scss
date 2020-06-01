@@ -1,6 +1,8 @@
 .logo-header {
   height: 60px;
   width: 200px;
+  margin-left: 20px;
+  padding-right: 20px;
 }
 
 .container {
@@ -15,10 +17,11 @@
 .logout-btn {
   position: relative;
   float: left;
-  top: 12px;
-  left: 18px;
-  height: 40px;
-  width: 80px;
+  top: 8px;
+  left: 12px;
+  min-height: 40px;
+  height: auto;
+  width: auto;
   font-size: 14px;
   border-radius: 5px;
   background-color: #64aad1;

@@ -2,6 +2,7 @@ import { Component, OnInit, Renderer2 } from '@angular/core';
 import { NavParams } from '@ionic/angular';
 import { ModalController, AngularDelegate } from '@ionic/angular';
 import { deleteImg, deleteImgFromShipmentItem } from '../../truckload/truckload.page';
+import { deleteImgFromTruck } from '../../single-truck/single-truck.page';
 import { Plugins } from '@capacitor/core';
 import { GlobalConstants } from '../../common/global';
 
@@ -51,26 +52,26 @@ export class ModalpagePage implements OnInit {
   }
 
   deleteImgClicked() {
-    if(this.whereToDeleteFrom == "itemImg") {
-      this.deleteImgFromItem();
-    }
-    else {
-      deleteImg(this.passId, this.renderer, this.modalCtrl);
-    }
+    // if(this.whereToDeleteFrom == "itemImg") {
+    //   this.deleteImgFromItem();
+    // }
+    // else {
+    //   deleteImg(this.passId, this.renderer, this.modalCtrl);
+    // }
 
+    deleteImgFromTruck(this.passId, this.renderer, this.modalCtrl, Storage);
     this.modalCtrl.dismiss();
   }
 
-  async deleteImgFromItem() {
-    const { value } = await Storage.get({ key: "catalog_truckItems" });
-    this.shipmentItems = JSON.parse(value);
-    var thisItem = this.shipmentItems[this.itemId];
-    var imgs = thisItem.imgs;
+  // async deleteImgFromItem() {
+  //   const { value } = await Storage.get({ key: "catalog_truckItems" });
+  //   this.shipmentItems = JSON.parse(value);
+  //   var img = this.shipmentItems[this.passId];
 
-    imgs.splice(this.passId, 1);
+  //   imgs.splice(this.passId, 1);
 
-    GlobalConstants.deletedImg = true;
+  //   GlobalConstants.deletedImg = true;
 
-    deleteImgFromShipmentItem(this.itemId, thisItem);
-  }
+  //   deleteImgFromShipmentItem(this.itemId, thisItem);
+  // }
 }

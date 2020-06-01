@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-buttons slot="start">
+      <ion-back-button style="float: left;" defaultHref="ftl-upload"></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      <img class="logo-header" src="../../assets/imgs/2x7-FreightSnap-Logo-Stickers.jpg" />
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="content">
+    <div class="container">
+      <div id="truckInfo">
+        <div class="truckloadIDSection purple center shadow">
+          <div class="truckInfo">
+            <h1 class="md-text white-text m-0 sm-text">Order ID</h1>
+            <p id="truckId" class="lg-text white-text m-0 bold"></p>
+            <button class="newItemBtn"><ion-icon name="add" class="md-text white-text bold" (click)="takePicture()"></ion-icon></button>
+          </div>
+        </div>
+        <div id="truckItemsSection" class="truckItemsSection">
+          <h1 class="white-text bold m-0 font-merri">All Truck Images</h1>
+          <span><p class="white-text m-0 inline font-jost">Number: </p><p id="numOfItems" class="white-text m-0 inline">0</p></span>
+          <div id="allTruckItems">
+          </div>
+        </div>
+        <div class="container">
+          <div id="imgs-section">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>
+
+<ion-footer class="ion-no-border">
+  <ion-toolbar color="dark">
+    <div class="footer dark">
+      <div class="container">
+        <button id="truckDoneBtn" class="truckDone" (click)="completeTruck()">COMPLETE TRUCK</button>
+      </div>
+    </div>
+  </ion-toolbar>
+</ion-footer>

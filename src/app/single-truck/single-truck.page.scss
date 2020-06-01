@@ -1,0 +1,252 @@
+.logo-header {
+    height: 60px;
+    width: 200px;
+}
+
+.header {
+    margin-top: 7px;
+    background-color: #07263b;
+}
+
+.inline {
+    display: inline;
+}
+
+.white-text {
+    color: white;
+}
+
+.center {
+    text-align: center;
+}
+
+.error-section {
+    text-align: center;
+    margin-top: 10px;
+    border: 5px solid red;
+    background-color: lightcoral;
+    min-height: 50px;
+}
+
+.error-text {
+    color: white;
+    font-family: 'Ubuntu', sans-serif;
+    margin-top: 10px;
+}
+
+.content {
+    min-height: 100%;
+    height: auto;
+    width: 100%; 
+    padding-top: 10px;
+    padding-bottom: 30px;
+    background-color: #07263b;
+}
+
+.dark {
+    background-color: #07263b;
+}
+
+.container {
+    width: 90%;
+    margin: auto;
+}
+
+.truckDone {
+    height: 45px;
+    width: 100%;
+    background-color: #ff4961;
+    color: white;
+    font-weight: bold;
+    font-size: 17px;
+    border-radius: 5px;
+    outline: none;
+}
+
+.footer {
+    padding: 30px 0;
+}
+
+.truckloadIDSection {
+    width: 100%;
+    min-height: 160px;
+    height: auto;
+    margin: auto;
+    border-radius: 5px;
+}
+
+.truckInfo {
+    padding-top: 30px;
+}
+
+.shadow {
+    box-shadow:
+  0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+  0 6.7px 5.3px rgba(0, 0, 0, 0.048),
+  0 12.5px 10px rgba(0, 0, 0, 0.06),
+  0 22.3px 17.9px rgba(0, 0, 0, 0.072),
+  0 41.8px 33.4px rgba(0, 0, 0, 0.086),
+  0 100px 80px rgba(0, 0, 0, 0.12)
+}
+
+.newItemBtn {
+    height: 50px;
+    width: 50px;
+    border-radius: 25px;
+    position: relative;
+    top: 22px;
+    background-color: #ff4961;
+    outline: none;
+}
+
+.truckItemsSection {
+    margin-top: 50px;
+}
+
+.truckItem {
+    margin: 5px 0;
+    min-height: 70px;
+    width: 100%;
+    background-color: white;
+    border-radius: 15px;
+}
+
+.itemName {
+    padding-top: 15px;
+}
+
+.font-jost {
+    font-family: 'Jost', sans-serif;
+}
+
+.font-merri {
+    font-family: 'Merriweather Sans', sans-serif;
+}
+
+.img-item {
+    padding-top: 5px;
+    padding-bottom: 30px;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.md-text {
+    font-size: 30px;
+}
+
+.lg-text {
+    font-size: 50px;
+}
+
+.m-0 {
+    margin: 0;
+}
+
+.content-header {
+    text-align: center;    
+}
+
+.section-title {
+    height: 35px;
+}
+
+.section-title-icon {
+    float: left;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    padding-top: 7px;
+    padding-left: 15px;;
+  }
+
+.section-title-text {
+    color: white;
+    font-weight: bold;
+    padding: 9px 40px;
+}
+
+.section-main-content {
+    padding-top: 9px;
+}
+
+.hide {
+    display: none;
+}
+
+.item-img {
+    height: 100px;
+    width: 100px;
+    margin-left: 10px;
+}
+
+.new-item-img {
+    max-height: 100px;
+    max-width: 100px;
+    margin-left: 10px;
+}
+
+.sec-btn {
+    color: white;
+    height: 40px;
+    width: 40px;
+    outline: none;
+}
+
+.sm-text {
+    font-size: 15px;
+}
+
+.round {
+    border-radius: 50%;
+}
+
+.input-btn {
+    margin-top: 10px;
+    margin-left: 5px;
+}
+
+.btn-icon {
+    font-size: 30px;
+}
+
+.pr-3 {
+    padding-right: 10px;
+}
+
+.section-content {
+    min-height: 100px;
+    padding-bottom: 10px;
+    height: auto;
+    background-color: #0B3049;
+    margin-top: 2px;
+  }
+
+.alt-blue {
+    background-color: #62add4;
+}
+
+.purple {
+    background-color: #445394;
+}
+
+.truck-btn {
+    height: 60px;
+    width: 100px;
+    font-size: 15px;
+    font-weight: bold;
+    border-radius: 10px;
+}
+
+.red {
+    background-color: #ff4961;
+}
+
+.green {
+    background-color: #2fdf75;
+}
+
+.ml-3 {
+    margin-left: 10px;
+}

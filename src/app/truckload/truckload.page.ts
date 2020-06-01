@@ -66,17 +66,17 @@ export class TruckloadPage implements OnInit {
 
   async getTruckItems() {
     const { value } = await Storage.get({ key: "catalog_truckItems" });
-    
-    if(value && value !== "undefined") {
+
+    if (value && value !== "undefined") {
       this.truckItems = JSON.parse(value);
 
       var numOfItemsText = document.getElementById("numOfItems");
       numOfItemsText.innerHTML = this.truckItems.length;
-  
+
       var allTruckItems = document.getElementById("allTruckItems");
       allTruckItems.innerHTML = "";
-  
-      for(var i = 0; i < this.truckItems.length; i++) {
+
+      for (var i = 0; i < this.truckItems.length; i++) {
         var splitTime = this.truckItems[i].time.split(":");
         var hrs = splitTime[0];
         var mins: any = parseInt(splitTime[1]);
@@ -85,7 +85,7 @@ export class TruckloadPage implements OnInit {
 
         var combined = hrs + "" + mins;
 
-        if(mins < 10) {
+        if (mins < 10) {
           mins = "0" + mins;
         }
 
@@ -98,7 +98,7 @@ export class TruckloadPage implements OnInit {
           hours = ((hours24 + 11) % 12) + 1;
           amPm = "pm";
         }
-  
+
         var truckItem = this.renderer.createElement("div");
         truckItem.classList.add("truckItem");
         this.renderer.setProperty(truckItem, "id", i);
@@ -112,7 +112,7 @@ export class TruckloadPage implements OnInit {
         itemName.classList.add("itemName");
         itemName.classList.add("bold");
 
-        if(this.truckItems[i].id == "") {
+        if (this.truckItems[i].id == "") {
           itemName.innerHTML = "Item " + (i + 1);
         }
         else {
@@ -126,15 +126,15 @@ export class TruckloadPage implements OnInit {
         itemTime.classList.add("itemTime");
         itemTime.classList.add("font-jost");
         itemTime.innerHTML = "loaded at " + hours + ":" + mins + amPm;
-  
+
         container.appendChild(itemName);
         container.appendChild(itemTime);
         truckItem.appendChild(container);
         allTruckItems.appendChild(truckItem);
       }
-  
+
       var truckItemElements = document.getElementsByName("truck-item");
-      for(var i = 0; i < truckItemElements.length; i++) {
+      for (var i = 0; i < truckItemElements.length; i++) {
         truckItemElements[i].addEventListener("click", (evt) => {
           this.truckItemClick(evt);
         });
@@ -143,9 +143,9 @@ export class TruckloadPage implements OnInit {
   }
 
   async truckItemClick(evt) {
-    if(GlobalConstants.clickedItem == false) {
+    if (GlobalConstants.clickedItem == false) {
       var id = evt.target.id;
-  
+
       GlobalConstants.clickedItem = true;
 
       const modal = this.modalCtrl.create({
@@ -184,18 +184,18 @@ export class TruckloadPage implements OnInit {
 
     var truckItemsArr = [];
 
-    const { value } = await Storage.get({ key:"catalog_truckItems"});
-    var isValueUndefined = ( value === "undefined" );
+    const { value } = await Storage.get({ key: "catalog_truckItems" });
+    var isValueUndefined = (value === "undefined");
 
-    if(value !== null && isValueUndefined === false) {
+    if (value !== null && isValueUndefined === false) {
       var existingData = JSON.parse(value);
 
-      for(var i = 0; i < existingData.length; i++) {
+      for (var i = 0; i < existingData.length; i++) {
         truckItemsArr.push(existingData[i]);
-      }      
+      }
     }
 
-    truckItemsArr.push(item);      
+    truckItemsArr.push(item);
 
     await Storage.set({
       key: "catalog_truckItems",
@@ -275,7 +275,7 @@ export class TruckloadPage implements OnInit {
     clearTimeout(this.timer);
   }
 
-  async completeTruck() {    
+  async completeTruck() {
     var alert = await this.alertCtrl.create({
       message: "Are you sure this truck is complete?",
       buttons: [
@@ -284,19 +284,18 @@ export class TruckloadPage implements OnInit {
           handler: async () => {
             await this.resetTruckloadId();
             await this.resetTruckItems();
+
+            window.location.href = "/ftl-upload";
           }
         },
         {
           text: "CANCEL",
-          handler: async() => {
+          handler: async () => {
             await alert.dismiss();
           }
         }
-    ]
+      ]
     })
-
-
-    window.location.href = "/ftl-upload";
   }
 
   async resetTruckloadId() {

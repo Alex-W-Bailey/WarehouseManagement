@@ -1,10 +1,11 @@
 import { Component, OnInit, Renderer2 } from '@angular/core';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
-import { NavParams, ModalController } from '@ionic/angular';
+import { NavParams, ModalController, AlertController } from '@ionic/angular';
 import { Plugins } from '@capacitor/core';
 import { GlobalConstants } from '../common/global';
 import { ModalpagePage } from '../modals/modalpage/modalpage.page';
 import { async } from '@angular/core/testing';
+import { ApiService } from '../api.service';
 
 const { Storage } = Plugins
 
@@ -15,7 +16,7 @@ const { Storage } = Plugins
 })
 export class SingleTruckPage implements OnInit {
 
-  constructor(private camera: Camera, private renderer: Renderer2, private modalCtrl: ModalController) { }
+  constructor(private camera: Camera, private renderer: Renderer2, private modalCtrl: ModalController, private alertCtrl: AlertController, private apiService: ApiService) { }
 
   ngOnInit() {
     var url = window.location.href;
@@ -112,6 +113,49 @@ export class SingleTruckPage implements OnInit {
         imgSection.appendChild(text);
       }
     }
+  }
+
+  async completeTruck() {    
+    var alert = await this.alertCtrl.create({
+      message: "Are you sure this truck is complete?",
+      buttons: [
+        {
+          text: "CANCEL",
+          handler: async() => {
+            await alert.dismiss();
+          }
+        },
+        {
+          text: "YES",
+          handler: async () => {
+            await this.resetTruckloadId();
+            await this.resetTruckItems();
+
+            // window.location.href = "/ftl-upload";
+            this.apiService.addTrailer(603).then((result) => {
+              console.log(result);
+            })
+
+          }
+        }
+    ]
+    });
+
+    await alert.present();
+  }
+
+  async resetTruckloadId() {
+    await Storage.set({
+      key: "catalog_truckloadsID",
+      value: undefined
+    });
+  }
+
+  async resetTruckItems() {
+    await Storage.set({
+      key: "catalog_singleTruckImgs",
+      value: undefined
+    });
   }
 
   async showModal(imgClicked) {

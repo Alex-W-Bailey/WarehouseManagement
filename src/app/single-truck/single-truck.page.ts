@@ -135,17 +135,18 @@ export class SingleTruckPage implements OnInit {
             await this.resetTruckloadId();
             await this.resetTruckItems();
 
-            // window.location.href = "/ftl-upload";
-            await this.apiService.addTrailer(603).subscribe( async (result) => {
+            await this.apiService.addTrailer(603).subscribe(async (result) => {
               var obj = Object.values(result);
               var houseId = obj[0].id;
               var allTruckImgs = GlobalConstants.singleTruckImgs;
 
-              for(var i = 0; i < allTruckImgs.length; i++) {
+              for (var i = 0; i < allTruckImgs.length; i++) {
                 var imgSplit = allTruckImgs[i].split(",");
 
                 this.apiService.addPicture(houseId, imgSplit[1]).then((data) => {
                   console.log(data);
+
+                  // window.location.href = "/ftl-upload";
                 });
               }
             })

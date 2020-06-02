@@ -142,12 +142,9 @@ export class SingleTruckPage implements OnInit {
               var allTruckImgs = GlobalConstants.singleTruckImgs;
 
               for(var i = 0; i < allTruckImgs.length; i++) {
-                var data = {
-                  house_id: houseId,
-                  ImageBase64: allTruckImgs[i]
-                }  
+                var imgSplit = allTruckImgs[i].split(",");
 
-                this.apiService.addPicture(data).then((data) => {
+                this.apiService.addPicture(houseId, imgSplit[1]).then((data) => {
                   console.log(data);
                 });
               }

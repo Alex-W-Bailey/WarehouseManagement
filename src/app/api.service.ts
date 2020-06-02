@@ -17,16 +17,20 @@ export class ApiService {
         return this.httpClient.get(`http://54.235.248.192/fs_api/trailerWebServices/addTrailerRecord.php?company_id=${companyId}`);
     }
 
-    public addPicture(data) {
+    public addPicture(houseId, img) {
         // return this.httpClient.get(`http://54.235.248.192/fs_api/trailerWebServices/addImageBase64.php?house_id=${houseId}&ImageBase64=${base64}`);
 
-        console.log(data);
+        console.log(houseId);
+        console.log(img);
 
         this.nativeHttp.setDataSerializer("json");
         return this.nativeHttp.sendRequest(`http://54.235.248.192/fs_api/trailerWebServices/addImageBase64.php`,
             {
                 method: 'post',
-                data: data,
+                data: {
+                    house_id: houseId,
+                    ImageBase64 : img 
+                }
             }
         );
     }

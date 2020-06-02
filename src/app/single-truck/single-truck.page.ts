@@ -29,7 +29,7 @@ export class SingleTruckPage implements OnInit {
     this.getImgs();
   }
 
-  private takePicture() {
+  public takePicture() {
     const options: CameraOptions = {
       quality: 75,
       targetHeight: 480,
@@ -49,8 +49,8 @@ export class SingleTruckPage implements OnInit {
       var allImgs = [];
 
 
-      if(truckImgs) {
-        for(var i = 0; i < truckImgs.length; i++) {
+      if (truckImgs) {
+        for (var i = 0; i < truckImgs.length; i++) {
           allImgs.push(truckImgs[i]);
         }
       }
@@ -60,7 +60,9 @@ export class SingleTruckPage implements OnInit {
       await Storage.set({
         key: "catalog_singleTruckImgs",
         value: JSON.stringify(allImgs)
-      })
+      });
+
+      console.log(allImgs);
 
       this.getImgs();
     }, (err) => {
@@ -71,6 +73,8 @@ export class SingleTruckPage implements OnInit {
   private async getImgs() {
     const { value } = await Storage.get({ key: "catalog_singleTruckImgs" });
     const truckImgs = JSON.parse(value);
+
+    console.log(truckImgs);
 
     GlobalConstants.singleTruckImgs = truckImgs
 
@@ -115,13 +119,13 @@ export class SingleTruckPage implements OnInit {
     }
   }
 
-  async completeTruck() {    
+  async completeTruck() {
     var alert = await this.alertCtrl.create({
       message: "Are you sure this truck is complete?",
       buttons: [
         {
           text: "CANCEL",
-          handler: async() => {
+          handler: async () => {
             await alert.dismiss();
           }
         },
@@ -138,7 +142,7 @@ export class SingleTruckPage implements OnInit {
 
           }
         }
-    ]
+      ]
     });
 
     await alert.present();
@@ -152,9 +156,11 @@ export class SingleTruckPage implements OnInit {
   }
 
   async resetTruckItems() {
+    var empty = [];
+
     await Storage.set({
       key: "catalog_singleTruckImgs",
-      value: undefined
+      value: JSON.stringify(empty)
     });
   }
 
@@ -176,38 +182,40 @@ export class SingleTruckPage implements OnInit {
 }
 
 export async function deleteImgFromTruck(id, renderer, modalCtrl, Storage) {
-  const { value } = await Storage.get({ key: "catalog_singleTruckImgs"});
-  var imgs = JSON.parse(value);
+  const { value } = await Storage.get({ key: "catalog_singleTruckImgs" });
 
-  imgs.splice(id, 1);
+  if (value !== undefined) {
+    var imgs = JSON.parse(value);
+    imgs.splice(id, 1);
 
-  if (imgs.length === 0) {
-    console.log("none");
+    if (imgs.length === 0) {
+      console.log("none");
 
-    var imgContainer = document.getElementById("imgs-section");
-    imgContainer.innerHTML = "No Images Captured...";
-  }
-  else {
-    console.log("found");
+      var imgContainer = document.getElementById("imgs-section");
+      imgContainer.innerHTML = "No Images Captured...";
+    }
+    else {
+      console.log("found");
 
-    var imgContainer = document.getElementById("imgs-section");
-    imgContainer.innerHTML = "";
+      var imgContainer = document.getElementById("imgs-section");
+      imgContainer.innerHTML = "";
 
-    var numOfImages: number[] = [];
-    var num: number = 0;
+      var numOfImages: number[] = [];
+      var num: number = 0;
 
-    for (var i = 0; i < imgs.length; i++) {
-      numOfImages.push(num);
-      num++;
+      for (var i = 0; i < imgs.length; i++) {
+        numOfImages.push(num);
+        num++;
 
-      const newImg = renderer.createElement('img');
-      renderer.addClass(newImg, "new-item-img");
-      renderer.addClass(newImg, "inline");
-      renderer.setProperty(newImg, "id", numOfImages[i]);
-      renderer.setProperty(newImg, 'src', imgs[i]);
+        const newImg = renderer.createElement('img');
+        renderer.addClass(newImg, "item-img");
+        renderer.addClass(newImg, "inline");
+        renderer.setProperty(newImg, "id", numOfImages[i]);
+        renderer.setProperty(newImg, 'src', imgs[i]);
 
-      newImg.addEventListener("click", () => showModal(newImg));
-      imgContainer.appendChild(newImg);
+        newImg.addEventListener("click", () => showModal(newImg));
+        imgContainer.appendChild(newImg);
+      }
     }
   }
 

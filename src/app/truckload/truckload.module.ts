@@ -16,7 +16,7 @@ import { TruckItemPage } from '../modals/truck-item/truck-item.page'
     IonicModule,
     TruckloadPageRoutingModule
   ],
-  declarations: [TruckloadPage, ModalpagePage, TruckItemPage],
+  declarations: [TruckloadPage],
   entryComponents: [ModalpagePage, TruckItemPage]
 })
 export class TruckloadPageModule {}

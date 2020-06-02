@@ -15,7 +15,7 @@ export class ApiService {
 
     public addTrailer(companyId) {
         this.nativeHttp.setDataSerializer("json");
-        return this.nativeHttp.sendRequest(`https://freightsnap-proto.herokuapp.com/newTerminal`, 
+        return this.nativeHttp.sendRequest(`http://54.235.248.192/fs_api/trailerWebServices/addTrailerRecord.php`, 
             {
                 method: 'post',
                 data: { company_id: companyId }

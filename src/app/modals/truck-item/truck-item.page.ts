@@ -1,4 +1,4 @@
-import { Component, OnInit, Renderer2, Renderer } from '@angular/core';
+import { Component, OnInit, Renderer2 } from '@angular/core';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { NavParams, ModalController } from '@ionic/angular';
 import { Plugins } from '@capacitor/core';

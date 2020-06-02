@@ -14,11 +14,19 @@ export class ApiService {
     }
 
     public addTrailer(companyId) {
+        return this.httpClient.get(`http://54.235.248.192/fs_api/trailerWebServices/addTrailerRecord.php?company_id=${companyId}`);
+    }
+
+    public addPicture(data) {
+        // return this.httpClient.get(`http://54.235.248.192/fs_api/trailerWebServices/addImageBase64.php?house_id=${houseId}&ImageBase64=${base64}`);
+
+        console.log(data);
+
         this.nativeHttp.setDataSerializer("json");
-        return this.nativeHttp.sendRequest(`http://54.235.248.192/fs_api/trailerWebServices/addTrailerRecord.php`, 
+        return this.nativeHttp.sendRequest(`http://54.235.248.192/fs_api/trailerWebServices/addImageBase64.php`,
             {
                 method: 'post',
-                data: { company_id: companyId }
+                data: data,
             }
         );
     }

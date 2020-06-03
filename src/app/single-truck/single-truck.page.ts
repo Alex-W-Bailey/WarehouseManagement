@@ -150,10 +150,10 @@ export class SingleTruckPage implements OnInit {
                     }
                     else {
                       console.log("err");
-                      showErr();
+                      showErr(this.alertCtrl);
   
-                      async function showErr() {
-                        const error = this.alertCtrl.create({
+                      async function showErr(alertCtrl) {
+                        const error = alertCtrl.create({
                           message: "Something went wrong. Please try again...",
                           buttons: [
                             {

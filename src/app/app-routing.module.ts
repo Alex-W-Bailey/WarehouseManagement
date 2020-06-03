@@ -16,7 +16,7 @@ const routes: Routes = [
     loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
   },
   {
-    path: 'ftl-upload',
+    path: 'ftl-upload/:success',
     loadChildren: () => import('./ftl-upload/ftl-upload.module').then( m => m.FtlUploadPageModule)
   },
   {

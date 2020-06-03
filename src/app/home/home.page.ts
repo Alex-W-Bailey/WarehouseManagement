@@ -23,6 +23,8 @@ export class HomePage {
   }
 
   ftlUpload() {
-    window.location.href = "/ftl-upload";
+    console.log("redirect to /ftl-upload/0");
+
+    window.location.href = "/ftl-upload/0";
   }
 }

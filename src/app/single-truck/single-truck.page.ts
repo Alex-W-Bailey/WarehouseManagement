@@ -64,8 +64,6 @@ export class SingleTruckPage implements OnInit {
         value: JSON.stringify(allImgs)
       });
 
-      console.log(allImgs);
-
       this.getImgs();
     }, (err) => {
       alert(err);
@@ -76,11 +74,7 @@ export class SingleTruckPage implements OnInit {
     const { value } = await Storage.get({ key: "catalog_singleTruckImgs" });
     const truckImgs = JSON.parse(value);
 
-    console.log(truckImgs);
-
     GlobalConstants.singleTruckImgs = truckImgs
-
-    console.log(GlobalConstants.singleTruckImgs);
 
     var imgSection = document.getElementById("imgs-section");
     imgSection.innerHTML = "";
@@ -141,8 +135,6 @@ export class SingleTruckPage implements OnInit {
             const user_info = JSON.parse(value);
             const companyId = parseInt(user_info.company_id);
 
-            console.log("company: " + companyId);
-
             await this.apiService.addTrailer(companyId, this.orderId).subscribe(async (result) => {
               var obj = Object.values(result);
               var houseId = obj[0].id;
@@ -150,12 +142,37 @@ export class SingleTruckPage implements OnInit {
 
               var allTruckImgs = GlobalConstants.singleTruckImgs;
 
-              for (var i = 0; i < allTruckImgs.length; i++) {
-                this.apiService.addPicture(houseId, allTruckImgs[i]).then((data) => {
-                  console.log(data);
-
-                  // window.location.href = "/ftl-upload";
-                });
+              if(allTruckImgs.length > 0) {
+                for (var i = 0; i < allTruckImgs.length; i++) {
+                  this.apiService.addPicture(houseId, allTruckImgs[i]).then((data) => {
+                    if (data) {
+                      window.location.href = "/ftl-upload/1";
+                    }
+                    else {
+                      console.log("err");
+                      showErr();
+  
+                      async function showErr() {
+                        const error = this.alertCtrl.create({
+                          message: "Something went wrong. Please try again...",
+                          buttons: [
+                            {
+                              text: "OK",
+                              handler: async () => {
+                                await error.dismiss();
+                              }
+                            }
+                          ]
+                        });
+  
+                        await error.present();
+                      }
+                    }
+                  });
+                }
+              }
+              else {
+                window.location.href = "ftl-upload/1";
               }
             });
           }
@@ -207,14 +224,10 @@ export async function deleteImgFromTruck(id, renderer, modalCtrl, Storage) {
     imgs.splice(id, 1);
 
     if (imgs.length === 0) {
-      console.log("none");
-
       var imgContainer = document.getElementById("imgs-section");
       imgContainer.innerHTML = "No Images Captured...";
     }
     else {
-      console.log("found");
-
       var imgContainer = document.getElementById("imgs-section");
       imgContainer.innerHTML = "";
 

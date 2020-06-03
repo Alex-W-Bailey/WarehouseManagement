@@ -6,6 +6,7 @@ import { ModalpagePage } from '../modals/modalpage/modalpage.page';
 import { Plugins } from '@capacitor/core';
 import { GlobalConstants } from '../common/global'
 import { interval } from 'rxjs';
+import { async } from 'rxjs/internal/scheduler/async';
 
 const { Storage } = Plugins
 
@@ -22,9 +23,35 @@ export class FtlUploadPage implements OnInit {
   scannedData: any = "";
   order_id: any = "";
 
-  constructor(private barcodeCtrl: BarcodeScanner, private camera: Camera, private renderer: Renderer2, private modalCtrl: ModalController) { }
+  constructor(private barcodeCtrl: BarcodeScanner, private camera: Camera, private renderer: Renderer2, private modalCtrl: ModalController, private alertCtrl: AlertController) { }
 
   ngOnInit() {
+    var url = window.location.href;
+    var splitUrl = url.split("/");
+    var success = splitUrl[4];
+
+    if(success == "1") {
+      console.log("show alert");
+
+      showAlert(this.alertCtrl);
+
+      async function showAlert(alert) {
+        var msg = await alert.create({
+          message: "Truck completed",
+          buttons: [
+            {
+              text: "OK",
+              handler: async () => {
+                await msg.dismiss();
+              }
+            }
+          ]
+        });
+
+        await msg.present();
+      }
+    }
+
     this.checkForStartedTruck();
   }
 

@@ -13,25 +13,45 @@ export class ApiService {
         return this.httpClient.get(`https://freightsnap-proto.herokuapp.com/login/${user}/${pass}`);
     }
 
-    public addTrailer(companyId) {
-        return this.httpClient.get(`http://54.235.248.192/fs_api/trailerWebServices/addTrailerRecord.php?company_id=${companyId}`);
+    public addTrailer(companyId, orderId) {
+        return this.httpClient.get(`http://54.235.248.192/fs_api/trailerWebServices/addTrailerRecord.php?company_id=${companyId}&order_id=${orderId}`);
     }
 
     public addPicture(houseId, img) {
-        // return this.httpClient.get(`http://54.235.248.192/fs_api/trailerWebServices/addImageBase64.php?house_id=${houseId}&ImageBase64=${base64}`);
-
         console.log(houseId);
         console.log(img);
 
-        this.nativeHttp.setDataSerializer("json");
         return this.nativeHttp.sendRequest(`http://54.235.248.192/fs_api/trailerWebServices/addImageBase64.php`,
             {
                 method: 'post',
                 data: {
                     house_id: houseId,
-                    ImageBase64 : img 
+                    ImageBase64: img
                 }
             }
         );
+    }
+
+    public getTest(houseId) {
+        console.log(houseId);
+
+        return this.nativeHttp.sendRequest(`http://54.235.248.192/fs_api/trailerWebServices/getTest.php?house_id=${houseId}`, 
+            {
+                method: 'get',
+            }
+        )
+    }
+
+    public postTest(houseId) {
+        console.log(houseId);
+
+        return this.nativeHttp.sendRequest(`http://54.235.248.192/fs_api/trailerWebServices/postTest.php`, 
+            {
+                method: 'post',
+                data: {
+                    house_id: houseId
+                }
+            }
+        )
     }
 } 

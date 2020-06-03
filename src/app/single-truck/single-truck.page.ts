@@ -18,13 +18,15 @@ export class SingleTruckPage implements OnInit {
 
   constructor(private camera: Camera, private renderer: Renderer2, private modalCtrl: ModalController, private alertCtrl: AlertController, private apiService: ApiService) { }
 
+  orderId: any;
+
   ngOnInit() {
     var url = window.location.href;
     var splitUrl = url.split("/");
-    var truckId = splitUrl[4];
+    this.orderId = splitUrl[4];
 
     var truckIdText = document.getElementById("truckId");
-    truckIdText.innerHTML = truckId;
+    truckIdText.innerHTML = this.orderId;
 
     this.getImgs();
   }
@@ -135,21 +137,24 @@ export class SingleTruckPage implements OnInit {
             await this.resetTruckloadId();
             await this.resetTruckItems();
 
-            await this.apiService.addTrailer(603).subscribe(async (result) => {
+            const { value } = await Storage.get({ key: "catalog_login" });
+            const user_info = JSON.parse(value);
+
+            await this.apiService.addTrailer(603, this.orderId).subscribe(async (result) => {
               var obj = Object.values(result);
               var houseId = obj[0].id;
+
+
               var allTruckImgs = GlobalConstants.singleTruckImgs;
 
               for (var i = 0; i < allTruckImgs.length; i++) {
-                var imgSplit = allTruckImgs[i].split(",");
-
-                this.apiService.addPicture(houseId, imgSplit[1]).then((data) => {
+                this.apiService.addPicture(houseId, allTruckImgs[i]).then((data) => {
                   console.log(data);
 
                   // window.location.href = "/ftl-upload";
                 });
               }
-            })
+            });
           }
         }
       ]

@@ -19,6 +19,26 @@ export class HomePage {
       value: "false"
     });
 
+    await Storage.set({
+      key: "catalog_truckItems",
+      value: undefined
+    });
+
+    await Storage.set({
+      key: "catalog_singleTruckImgs",
+      value: JSON.stringify([])
+    });
+
+    await Storage.set({
+      key: "catalog_truckstart",
+      value: undefined
+    });
+
+    await Storage.set({
+      key: "catalog_truckloadsID",
+      value: undefined
+    });
+
     window.location.href = "/login";
   }
 

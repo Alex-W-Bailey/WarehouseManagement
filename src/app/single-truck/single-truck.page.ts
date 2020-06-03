@@ -139,8 +139,11 @@ export class SingleTruckPage implements OnInit {
 
             const { value } = await Storage.get({ key: "catalog_login" });
             const user_info = JSON.parse(value);
+            const companyId = parseInt(user_info.company_id);
 
-            await this.apiService.addTrailer(603, this.orderId).subscribe(async (result) => {
+            console.log("company: " + companyId);
+
+            await this.apiService.addTrailer(companyId, this.orderId).subscribe(async (result) => {
               var obj = Object.values(result);
               var houseId = obj[0].id;
 

@@ -131,7 +131,6 @@ export class SingleTruckPage implements OnInit {
             const loading = await this.loadingCtrl.create();
             await loading.present();
 
-
             await this.resetTruckloadId();
             await this.resetTruckItems();
 
@@ -142,7 +141,6 @@ export class SingleTruckPage implements OnInit {
             await this.apiService.addTrailer(companyId, this.orderId).subscribe(async (result) => {
               var obj = Object.values(result);
               var houseId = obj[0].id;
-
 
               var allTruckImgs = GlobalConstants.singleTruckImgs;
 

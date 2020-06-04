@@ -1,6 +1,6 @@
 import { Component, OnInit, Renderer2 } from '@angular/core';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
-import { NavParams, ModalController, AlertController } from '@ionic/angular';
+import { NavParams, ModalController, AlertController, LoadingController } from '@ionic/angular';
 import { Plugins } from '@capacitor/core';
 import { GlobalConstants } from '../common/global';
 import { ModalpagePage } from '../modals/modalpage/modalpage.page';
@@ -16,7 +16,7 @@ const { Storage } = Plugins
 })
 export class SingleTruckPage implements OnInit {
 
-  constructor(private camera: Camera, private renderer: Renderer2, private modalCtrl: ModalController, private alertCtrl: AlertController, private apiService: ApiService) { }
+  constructor(private camera: Camera, private renderer: Renderer2, private modalCtrl: ModalController, private loadingCtrl: LoadingController, private alertCtrl: AlertController, private apiService: ApiService) { }
 
   orderId: any;
 
@@ -128,6 +128,10 @@ export class SingleTruckPage implements OnInit {
         {
           text: "YES",
           handler: async () => {
+            const loading = await this.loadingCtrl.create();
+            await loading.present();
+
+
             await this.resetTruckloadId();
             await this.resetTruckItems();
 
@@ -143,42 +147,10 @@ export class SingleTruckPage implements OnInit {
               var allTruckImgs = GlobalConstants.singleTruckImgs;
 
               if (allTruckImgs.length > 0) {
-                // allTruckImgs.forEach(async (img, index) => {
-
-                //   console.log(index);
-                //   console.log(img);
-
-                //   await this.apiService.addPicture(houseId, allTruckImgs[index]).then((data) => {
-                //     if (data) {
-                //       // window.location.href = "/ftl-upload/1";
-                //     }
-                //     else {
-                //       console.log("err");
-                //       showErr(this.alertCtrl);
-
-                //       async function showErr(alertCtrl) {
-                //         const error = alertCtrl.create({
-                //           message: "Something went wrong. Please try again...",
-                //           buttons: [
-                //             {
-                //               text: "OK",
-                //               handler: async () => {
-                //                 await error.dismiss();
-                //               }
-                //             }
-                //           ]
-                //         });
-
-                //         await error.present();
-                //       }
-                //     }
-                //   });
-                // })
-
                 for (var i = 0; i < allTruckImgs.length; i++) {
                   await this.apiService.addPicture(houseId, allTruckImgs[i]).then((data) => {
                     if (data) {
-                      // window.location.href = "/ftl-upload/1";
+                      console.log("img uploaded");
                     }
                     else {
                       console.log("err");
@@ -201,6 +173,14 @@ export class SingleTruckPage implements OnInit {
                       }
                     }
                   });
+
+                  console.log("index: " + i);
+                  console.log("length: " + allTruckImgs.length)
+
+                  if(i == (allTruckImgs.length - 1)) {
+                    loading.dismiss();
+                    window.location.href = "/ftl-upload/1";
+                  }
                 }
               }
               else {

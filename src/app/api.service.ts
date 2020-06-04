@@ -18,6 +18,7 @@ export class ApiService {
     }
 
     public addPicture(houseId, img) {
+        console.log("API");
         console.log(houseId);
         console.log(img);
 
@@ -30,28 +31,5 @@ export class ApiService {
                 }
             }
         );
-    }
-
-    public getTest(houseId) {
-        console.log(houseId);
-
-        return this.nativeHttp.sendRequest(`http://54.235.248.192/fs_api/trailerWebServices/getTest.php?house_id=${houseId}`, 
-            {
-                method: 'get',
-            }
-        )
-    }
-
-    public postTest(houseId) {
-        console.log(houseId);
-
-        return this.nativeHttp.sendRequest(`http://54.235.248.192/fs_api/trailerWebServices/postTest.php`, 
-            {
-                method: 'post',
-                data: {
-                    house_id: houseId
-                }
-            }
-        )
     }
 } 

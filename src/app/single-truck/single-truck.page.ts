@@ -142,16 +142,48 @@ export class SingleTruckPage implements OnInit {
 
               var allTruckImgs = GlobalConstants.singleTruckImgs;
 
-              if(allTruckImgs.length > 0) {
+              if (allTruckImgs.length > 0) {
+                // allTruckImgs.forEach(async (img, index) => {
+
+                //   console.log(index);
+                //   console.log(img);
+
+                //   await this.apiService.addPicture(houseId, allTruckImgs[index]).then((data) => {
+                //     if (data) {
+                //       // window.location.href = "/ftl-upload/1";
+                //     }
+                //     else {
+                //       console.log("err");
+                //       showErr(this.alertCtrl);
+
+                //       async function showErr(alertCtrl) {
+                //         const error = alertCtrl.create({
+                //           message: "Something went wrong. Please try again...",
+                //           buttons: [
+                //             {
+                //               text: "OK",
+                //               handler: async () => {
+                //                 await error.dismiss();
+                //               }
+                //             }
+                //           ]
+                //         });
+
+                //         await error.present();
+                //       }
+                //     }
+                //   });
+                // })
+
                 for (var i = 0; i < allTruckImgs.length; i++) {
-                  this.apiService.addPicture(houseId, allTruckImgs[i]).then((data) => {
+                  await this.apiService.addPicture(houseId, allTruckImgs[i]).then((data) => {
                     if (data) {
-                      window.location.href = "/ftl-upload/1";
+                      // window.location.href = "/ftl-upload/1";
                     }
                     else {
                       console.log("err");
                       showErr(this.alertCtrl);
-  
+
                       async function showErr(alertCtrl) {
                         const error = alertCtrl.create({
                           message: "Something went wrong. Please try again...",
@@ -164,7 +196,7 @@ export class SingleTruckPage implements OnInit {
                             }
                           ]
                         });
-  
+
                         await error.present();
                       }
                     }

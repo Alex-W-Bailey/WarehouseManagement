@@ -3,7 +3,6 @@ import { Plugins } from '@capacitor/core';
 
 const { Storage } = Plugins
 
-
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -43,8 +42,6 @@ export class HomePage {
   }
 
   ftlUpload() {
-    console.log("redirect to /ftl-upload/0");
-
     window.location.href = "/ftl-upload/0";
   }
 }

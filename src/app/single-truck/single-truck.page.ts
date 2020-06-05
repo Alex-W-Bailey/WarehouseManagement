@@ -74,7 +74,7 @@ export class SingleTruckPage implements OnInit {
     const { value } = await Storage.get({ key: "catalog_singleTruckImgs" });
     const truckImgs = JSON.parse(value);
 
-    GlobalConstants.singleTruckImgs = truckImgs
+    GlobalConstants.singleTruckImgs = truckImgs;
 
     var imgSection = document.getElementById("imgs-section");
     imgSection.innerHTML = "";
@@ -172,9 +172,6 @@ export class SingleTruckPage implements OnInit {
                     }
                   });
 
-                  console.log("index: " + i);
-                  console.log("length: " + allTruckImgs.length)
-
                   if(i == (allTruckImgs.length - 1)) {
                     loading.dismiss();
                     window.location.href = "/ftl-upload/1";
@@ -271,15 +268,6 @@ export async function deleteImgFromTruck(id, renderer, modalCtrl, Storage) {
             itemImg[x].addEventListener("click", (evt) => this.showModal(evt));
           }
         }
-
-        // const newImg = renderer.createElement('img');
-        // renderer.addClass(newImg, "item-img");
-        // renderer.addClass(newImg, "inline");
-        // renderer.setProperty(newImg, "id", numOfImages[i]);
-        // renderer.setProperty(newImg, 'src', imgs[i]);
-
-        // newImg.addEventListener("click", () => showModal(newImg));
-        // imgContainer.appendChild(newImg);
       }
     }
   }
@@ -287,7 +275,7 @@ export async function deleteImgFromTruck(id, renderer, modalCtrl, Storage) {
   await Storage.set({
     key: "catalog_singleTruckImgs",
     value: JSON.stringify(imgs)
-  })
+  });
 
   async function showModal(imgClicked) {
     var id = imgClicked.id;

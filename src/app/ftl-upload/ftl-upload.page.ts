@@ -138,7 +138,7 @@ export class FtlUploadPage implements OnInit {
       else {
         var hours24 = parseInt(combined.substring(0, 2), 10);
         hours = ((hours24 + 11) % 12) + 1;
-        amPm = "pm"
+        amPm = "pm";
       }
 
       var truckContent = this.renderer.createElement("div");

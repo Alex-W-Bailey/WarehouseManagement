@@ -233,6 +233,8 @@ export async function deleteImgFromTruck(id, renderer, modalCtrl, Storage) {
     var imgs = JSON.parse(value);
     imgs.splice(id, 1);
 
+    GlobalConstants.singleTruckImgs.splice(id, 1);
+
     if (imgs.length === 0) {
       var imgContainer = document.getElementById("imgs-section");
       imgContainer.innerHTML = "No Images Captured...";

@@ -240,6 +240,8 @@ export async function deleteImgFromTruck(id, renderer, modalCtrl, Storage) {
     else {
       var imgContainer = document.getElementById("imgs-section");
       imgContainer.innerHTML = "";
+  
+      var numOfImgs = document.getElementById("numOfItems");
 
       var numOfImages: number[] = [];
       var num: number = 0;
@@ -248,14 +250,34 @@ export async function deleteImgFromTruck(id, renderer, modalCtrl, Storage) {
         numOfImages.push(num);
         num++;
 
-        const newImg = renderer.createElement('img');
-        renderer.addClass(newImg, "item-img");
-        renderer.addClass(newImg, "inline");
-        renderer.setProperty(newImg, "id", numOfImages[i]);
-        renderer.setProperty(newImg, 'src', imgs[i]);
+        if (imgs.length > 0) {
+          numOfImgs.innerHTML = imgs.length;
+  
+          for (var i = 0; i < imgs.length; i++) {
+            var newImg = renderer.createElement("img");
+            renderer.addClass(newImg, "new-item-img");
+            renderer.setProperty(newImg, "id", i);
+            renderer.setProperty(newImg, "name", "item-img");
+            renderer.setProperty(newImg, "src", imgs[i]);
+            renderer.addClass(newImg, "float-left");
+  
+            imgContainer.appendChild(newImg);
+          }
+  
+          var itemImg = document.getElementsByName("item-img");
+          for (var x = 0; x < itemImg.length; x++) {
+            itemImg[x].addEventListener("click", (evt) => this.showModal(evt));
+          }
+        }
 
-        newImg.addEventListener("click", () => showModal(newImg));
-        imgContainer.appendChild(newImg);
+        // const newImg = renderer.createElement('img');
+        // renderer.addClass(newImg, "item-img");
+        // renderer.addClass(newImg, "inline");
+        // renderer.setProperty(newImg, "id", numOfImages[i]);
+        // renderer.setProperty(newImg, 'src', imgs[i]);
+
+        // newImg.addEventListener("click", () => showModal(newImg));
+        // imgContainer.appendChild(newImg);
       }
     }
   }

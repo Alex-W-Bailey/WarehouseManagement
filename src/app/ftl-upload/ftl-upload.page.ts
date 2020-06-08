@@ -5,13 +5,12 @@ import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { ModalpagePage } from '../modals/modalpage/modalpage.page';
 import { Plugins } from '@capacitor/core';
 import { GlobalConstants } from '../common/global'
-import { interval } from 'rxjs';
 import { async } from 'rxjs/internal/scheduler/async';
 
 const { Storage } = Plugins
 
 @Component({
-  selector: 'app-ftl-upload',
+  selector: 'app-ftl-upload',        
   templateUrl: './ftl-upload.page.html',
   styleUrls: ['./ftl-upload.page.scss'],
 })
@@ -26,13 +25,13 @@ export class FtlUploadPage implements OnInit {
   constructor(private barcodeCtrl: BarcodeScanner, private camera: Camera, private renderer: Renderer2, private modalCtrl: ModalController, private alertCtrl: AlertController) { }
 
   ngOnInit() {
+    console.log("test");
+
     var url = window.location.href;
     var splitUrl = url.split("/");
     var success = splitUrl[4];
 
     if(success == "1") {
-      console.log("show alert");
-
       showAlert(this.alertCtrl);
 
       async function showAlert(alert) {
@@ -64,6 +63,8 @@ export class FtlUploadPage implements OnInit {
   }
 
   async startNewTruck() {
+    console.log("start truck clicked")
+
     const { truckID } = this;
 
     await this.saveTruckloadID(truckID);
@@ -128,7 +129,7 @@ export class FtlUploadPage implements OnInit {
       var combined = hrs + "" + mins;
 
       if(mins < 10) {
-        mins = "0" + mins
+        mins = "0" + mins;
       }
 
       if (hrs < 12) {
@@ -156,7 +157,7 @@ export class FtlUploadPage implements OnInit {
       truckTimestamp.classList.add("m-0");
       truckTimestamp.classList.add("inline");
       truckTimestamp.classList.add("font-jost");
-      truckTimestamp.innerHTML = "Truck started at " + hours + ":" + mins + amPm + " " + formattedTruckDate
+      truckTimestamp.innerHTML = "Truck started at " + hours + ":" + mins + amPm + " " + formattedTruckDate;
 
       this.renderer.appendChild(truckContent, truckID);
       this.renderer.appendChild(truckContent, truckTimestamp);

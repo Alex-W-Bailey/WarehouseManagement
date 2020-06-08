@@ -25,8 +25,6 @@ export class FtlUploadPage implements OnInit {
   constructor(private barcodeCtrl: BarcodeScanner, private camera: Camera, private renderer: Renderer2, private modalCtrl: ModalController, private alertCtrl: AlertController) { }
 
   ngOnInit() {
-    console.log("test");
-
     var url = window.location.href;
     var splitUrl = url.split("/");
     var success = splitUrl[4];
@@ -63,8 +61,6 @@ export class FtlUploadPage implements OnInit {
   }
 
   async startNewTruck() {
-    console.log("start truck clicked")
-
     const { truckID } = this;
 
     await this.saveTruckloadID(truckID);

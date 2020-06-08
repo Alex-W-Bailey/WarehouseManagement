@@ -144,42 +144,44 @@ export class SingleTruckPage implements OnInit {
 
               var allTruckImgs = GlobalConstants.singleTruckImgs;
 
-              if (allTruckImgs.length > 0) {
-                for (var i = 0; i < allTruckImgs.length; i++) {
-                  await this.apiService.addPicture(houseId, allTruckImgs[i]).then((data) => {
-                    if (data) {
-                      console.log("img uploaded");
-                    }
-                    else {
-                      console.log("err");
-                      showErr(this.alertCtrl);
-
-                      async function showErr(alertCtrl) {
-                        const error = alertCtrl.create({
-                          message: "Something went wrong. Please try again...",
-                          buttons: [
-                            {
-                              text: "OK",
-                              handler: async () => {
-                                await error.dismiss();
-                              }
-                            }
-                          ]
-                        });
-
-                        await error.present();
+              if(allTruckImgs) {
+                if (allTruckImgs.length > 0) {
+                  for (var i = 0; i < allTruckImgs.length; i++) {
+                    await this.apiService.addPicture(houseId, allTruckImgs[i]).then((data) => {
+                      if (data) {
+                        console.log("img uploaded");
                       }
+                      else {
+                        console.log("err");
+                        showErr(this.alertCtrl);
+  
+                        async function showErr(alertCtrl) {
+                          const error = alertCtrl.create({
+                            message: "Something went wrong. Please try again...",
+                            buttons: [
+                              {
+                                text: "OK",
+                                handler: async () => {
+                                  await error.dismiss();
+                                }
+                              }
+                            ]
+                          });
+  
+                          await error.present();
+                        }
+                      }
+                    });
+  
+                    if(i == (allTruckImgs.length - 1)) {
+                      loading.dismiss();
+                      window.location.href = "/ftl-upload/1";
                     }
-                  });
-
-                  if(i == (allTruckImgs.length - 1)) {
-                    loading.dismiss();
-                    window.location.href = "/ftl-upload/1";
                   }
                 }
-              }
-              else {
-                window.location.href = "ftl-upload/1";
+                else {
+                  window.location.href = "ftl-upload/1";
+                }
               }
             });
           }

@@ -94,7 +94,7 @@ export class LoginPage implements OnInit {
         this.setLoginInfo("true", userInfo);
       }
       else {
-        this.setLoginInfo("false", "");
+        this.setLoginInfo("false", userInfo);
       }
     }
   }

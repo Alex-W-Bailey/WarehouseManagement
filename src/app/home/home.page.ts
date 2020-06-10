@@ -44,4 +44,8 @@ export class HomePage {
   ftlUpload() {
     window.location.href = "/ftl-upload/0";
   }
+
+  inbound() {
+    window.location.href = "/inbound";
+  }
 }

@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar color="dark">
-      <button class="logout-btn bold inline" (click)="logout()">LOGOUT</button>
+    <button class="logout-btn bold inline" (click)="logout()">LOGOUT</button>
     <ion-title>
       <img class="logo-header inline" src="../../assets/imgs/2x7-FreightSnap-Logo-Stickers.jpg" />
     </ion-title>
@@ -12,7 +12,20 @@
     <div class="container center">
       <button class="dashboardTile" (click)="ftlUpload()">
         <ion-icon name="cloud-upload-outline" class="tile-icon"></ion-icon>
-        <p class="tile-text" >FTL Upload</p>
+        <p class="tile-text">FTL Upload</p>
+      </button>
+    </div>
+    <div class="container center">
+      <button class="dashboardTile" (click)="inbound()">
+        <ion-icon name="arrow-redo-outline" class="tile-icon"></ion-icon>
+        <p class="tile-text">Inbound</p>
+        <p class="tile-text p-0">Shipment</p>
+      </button>
+    </div>
+    <div class="container center">
+      <button class="dashboardTile" (click)="inbound()">
+        <ion-icon name="arrow-undo-outline" class="tile-icon"></ion-icon>
+        <p class="tile-text">Outbound Shipment</p>
       </button>
     </div>
   </div>

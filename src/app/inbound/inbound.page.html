@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-buttons slot="start">
+      <ion-back-button style="float: left;" defaultHref="home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      <img class="logo-header" src="../../assets/imgs/2x7-FreightSnap-Logo-Stickers.jpg" />
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="content">
+    <div class="container">
+      <div class="companyInfoSection purple center shadow">
+        <div class="info">
+          <h1 class="md-text white-text m-0 light-bold">Inbound Order</h1>
+          <p id="companyName" class="lg-text white-text m-0 bold">ALEX COMPANY</p>
+        </div>
+      </div>
+      <div class="orderInfoSection">
+        <div class="scanSection">
+          <div class="scanTitle alt-blue">
+            <div class="container">
+              <ion-icon class="scanTitleIcon inline" name="file-tray"></ion-icon>
+              <h3 class="inline white-text bold sm-text m-0 pt-title">SLOT ID</h3>
+            </div>
+          </div>
+          <div class="scanBody blue">
+            <div class="container pt-2">
+              <ion-item color="dark">
+                <ion-input placeholder="Scan or Type Slot ID"></ion-input>
+              </ion-item>
+              <ion-button size="default" expand="block">SCAN</ion-button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="orderInfoSection">
+        <div class="scanSection">
+          <div class="scanTitle alt-blue">
+            <div class="container">
+              <ion-icon name="cube" class="scanTitleIcon"></ion-icon>
+              <h3 class="inline white-text bold sm-text m-0 pt-title">PO / SO ID</h3>
+            </div>
+          </div>
+          <div class="scanBody blue"> 
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>

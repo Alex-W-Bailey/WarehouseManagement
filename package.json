@@ -13,6 +13,7 @@
   },
   "private": true,
   "dependencies": {
+    "@angular/animations": "^9.1.10",
     "@angular/common": "~9.1.9",
     "@angular/core": "~9.1.9",
     "@angular/forms": "~9.1.9",
@@ -33,6 +34,7 @@
     "cordova-plugin-camera": "^4.1.0",
     "cordova-plugin-file": "^6.0.2",
     "core-js": "^2.5.4",
+    "ionic-tooltips": "^4.0.0-beta.0",
     "phonegap-plugin-barcodescanner": "^8.1.0",
     "rxjs": "~6.5.1",
     "tslib": "^1.10.0",

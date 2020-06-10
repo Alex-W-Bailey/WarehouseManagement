@@ -30,7 +30,12 @@ const routes: Routes = [
   {
     path: 'single-truck/:id',
     loadChildren: () => import('./single-truck/single-truck.module').then( m => m.SingleTruckPageModule)
-  },
+  },  {
+    path: 'inbound',
+    loadChildren: () => import('./inbound/inbound.module').then( m => m.InboundPageModule)
+  }
+
+
 ];
 
 @NgModule({

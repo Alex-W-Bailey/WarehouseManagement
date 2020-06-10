@@ -17,6 +17,10 @@ export class ApiService {
         return this.httpClient.get(`http://54.235.248.192/fs_api/trailerWebServices/addTrailerRecord.php?company_id=${companyId}&order_id=${orderId}`);
     }
 
+    public getCompanyInfo(companyNum) {
+        return this.httpClient.get(`https://freightsnap-proto.herokuapp.com/getCompanyInfo/${companyNum}`);
+    }
+
     public addPicture(houseId, img) {
         console.log("API");
         console.log(houseId);

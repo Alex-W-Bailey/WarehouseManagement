@@ -33,6 +33,10 @@ const routes: Routes = [
   },  {
     path: 'inbound',
     loadChildren: () => import('./inbound/inbound.module').then( m => m.InboundPageModule)
+  },
+  {
+    path: 'outbound',
+    loadChildren: () => import('./outbound/outbound.module').then( m => m.OutboundPageModule)
   }
 
 

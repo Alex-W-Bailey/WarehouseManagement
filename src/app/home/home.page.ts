@@ -48,4 +48,8 @@ export class HomePage {
   inbound() {
     window.location.href = "/inbound";
   }
+
+  outbound() {
+    window.location.href = "/outbound";
+  }
 }

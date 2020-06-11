@@ -60,7 +60,9 @@ export class InboundPage implements OnInit {
     });
   }
 
-  addOrderToBin() {
-    console.log("add");
+  async addOrderToBin() {
+    await this.api.setWarehouseSlot(603, 123, 1, "Inbound").subscribe((data) => {
+      console.log(data);
+    });
   }
 }

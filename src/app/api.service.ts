@@ -21,6 +21,10 @@ export class ApiService {
         return this.httpClient.get(`https://freightsnap-proto.herokuapp.com/getCompanyInfo/${companyNum}`);
     }
 
+    public setWarehouseSlot(companyId, slot_id, slot_item_id, slot_group) {
+        return this.httpClient.get(`http://54.235.248.192/fs_api/trailerWebServices/updateWarehouseSlot.php?company_id=${companyId}&slot_id=${slot_id}&slot_item_id=${slot_item_id}&slot_group=${slot_group}`)
+    }
+
     public addPicture(houseId, img) {
         console.log("API");
         console.log(houseId);

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BarcodeScanner, BarcodeScannerOptions } from '@ionic-native/barcode-scanner/ngx';
+import { LoadingController } from '@ionic/angular';
 import { Plugins } from '@capacitor/core';
 
 import { ApiService } from '../api.service';
@@ -13,20 +14,21 @@ const { Storage } = Plugins;
 })
 export class InboundPage implements OnInit {
 
-  constructor(private barcodeCtrl: BarcodeScanner, private api: ApiService) { }
+  constructor(private barcodeCtrl: BarcodeScanner, private api: ApiService, private loadingCtrl: LoadingController) { }
 
   slotId: string = "";
   po_soId: string = "";
-
+  
+  companyId: any;
   pro_number: any;
 
   async ngOnInit() {
     const { value } = await Storage.get({ key: "catalog_login"});
     const userData = JSON.parse(value);
 
-    var companyNum = userData.company_id;
+    this.companyId = userData.company_id;
 
-    await this.api.getCompanyInfo(companyNum).subscribe((data) => {
+    await this.api.getCompanyInfo(this.companyId).subscribe((data) => {
       var companyNameElement = document.getElementById("companyName");
       var companyName = data[0].company_name;
 
@@ -61,8 +63,11 @@ export class InboundPage implements OnInit {
   }
 
   async addOrderToBin() {
-    await this.api.setWarehouseSlot(603, 123, 1, "Inbound").subscribe((data) => {
-      console.log(data);
+    const loading = await this.loadingCtrl.create({});
+    await loading.present();
+
+    await this.api.setWarehouseSlot(this.companyId, this.slotId, this.po_soId, "Inbound").subscribe( async (data) => {
+      await loading.dismiss();
     });
   }
 }

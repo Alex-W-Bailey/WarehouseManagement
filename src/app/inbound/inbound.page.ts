@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BarcodeScanner, BarcodeScannerOptions } from '@ionic-native/barcode-scanner/ngx';
-import { LoadingController } from '@ionic/angular';
+import { LoadingController, AlertController } from '@ionic/angular';
 import { Plugins } from '@capacitor/core';
 
 import { ApiService } from '../api.service';
@@ -14,16 +14,16 @@ const { Storage } = Plugins;
 })
 export class InboundPage implements OnInit {
 
-  constructor(private barcodeCtrl: BarcodeScanner, private api: ApiService, private loadingCtrl: LoadingController) { }
+  constructor(private barcodeCtrl: BarcodeScanner, private api: ApiService, private loadingCtrl: LoadingController, private alertCtrl: AlertController) { }
 
   slotId: string = "";
   po_soId: string = "";
-  
+
   companyId: any;
   pro_number: any;
 
   async ngOnInit() {
-    const { value } = await Storage.get({ key: "catalog_login"});
+    const { value } = await Storage.get({ key: "catalog_login" });
     const userData = JSON.parse(value);
 
     this.companyId = userData.company_id;
@@ -51,11 +51,11 @@ export class InboundPage implements OnInit {
     this.barcodeCtrl.scan(options).then(barcodeData => {
       this.pro_number = barcodeData.text;
 
-      if(itemScanned == "slot") {
+      if (itemScanned == "slot") {
         this.slotId = this.pro_number;
       }
       else {
-        this.po_soId = this.pro_number; 
+        this.po_soId = this.pro_number;
       }
     }).catch(err => {
       alert(err);
@@ -66,7 +66,42 @@ export class InboundPage implements OnInit {
     const loading = await this.loadingCtrl.create({});
     await loading.present();
 
-    await this.api.setWarehouseSlot(this.companyId, this.slotId, this.po_soId, "Inbound").subscribe( async (data) => {
+    await this.api.setWarehouseSlot(this.companyId, this.slotId, this.po_soId, "Inbound").subscribe(async (data) => {
+      var dataVals = Object.values(data)
+      console.log(dataVals)
+
+      if (dataVals[2].includes("slot_id not found!")) {
+        const errAlert = await this.alertCtrl.create({
+          message: "Slot Does Not Exist",
+          buttons: [
+            {
+              text: 'OK',
+              handler: async () => {
+                await errAlert.dismiss();
+              }
+            }
+          ]
+        });
+
+        errAlert.present();
+      }
+      else {
+        const successAlert = await this.alertCtrl.create({
+          message: "Item Added To Slot",
+          buttons: [
+            {
+              text: 'OK',
+              handler: async () => {
+                await successAlert.dismiss();
+                window.location.href = "/home";
+              }
+            }
+          ]
+        });
+
+        successAlert.present();
+      }
+
       await loading.dismiss();
     });
   }

@@ -74,7 +74,12 @@ export class SingleTruckPage implements OnInit {
     const { value } = await Storage.get({ key: "catalog_singleTruckImgs" });
     const truckImgs = JSON.parse(value);
 
-    GlobalConstants.singleTruckImgs = truckImgs;
+    if(truckImgs) {
+      GlobalConstants.singleTruckImgs = truckImgs;
+    }
+    else {
+      GlobalConstants.singleTruckImgs = [];
+    }
 
     var imgSection = document.getElementById("imgs-section");
     imgSection.innerHTML = "";

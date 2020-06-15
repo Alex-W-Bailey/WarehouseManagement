@@ -52,4 +52,8 @@ export class HomePage {
   outbound() {
     window.location.href = "/outbound";
   }
+
+  checkout() {
+    window.location.href = "/checkout";
+  }
 }

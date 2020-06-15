@@ -37,6 +37,10 @@ const routes: Routes = [
   {
     path: 'outbound',
     loadChildren: () => import('./outbound/outbound.module').then( m => m.OutboundPageModule)
+  },
+  {
+    path: 'checkout',
+    loadChildren: () => import('./checkout/checkout.module').then( m => m.CheckoutPageModule)
   }
 
 

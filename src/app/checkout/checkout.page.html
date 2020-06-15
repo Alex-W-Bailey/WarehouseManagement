@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-buttons slot="start">
+      <ion-back-button style="float: left;" defaultHref="home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      <img class="logo-header" src="../../assets/imgs/2x7-FreightSnap-Logo-Stickers.jpg" />
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="content">
+    <div class="container">
+      <div class="companyInfoSection purple center shadow">
+        <div class="info">
+          <h1 class="md-text white-text m-0 light-bold">Checkout Location</h1>
+          <p id="companyName" class="lg-text white-text m-0 bold upper"></p>
+        </div>
+      </div>
+      <div class="orderInfoSection">
+        <div class="scanSection">
+          <div class="scanTitle alt-blue shadow">
+            <div class="container">
+              <ion-icon class="scanTitleIcon inline" name="file-tray"></ion-icon>
+              <h3 class="inline white-text bold sm-text m-0 pt-title">SLOT ID</h3>
+            </div>
+          </div>
+          <div class="scanBody shadow blue">
+            <div class="container pt-2">
+              <ion-item color="dark">
+                <ion-input [(ngModel)]="slotId" placeholder="Scan or Type Slot ID"></ion-input>
+              </ion-item>
+              <ion-button size="default" expand="block" (click)="scanBarcode('slot')"><ion-icon class="white-text md-text" name="barcode-outline"></ion-icon></ion-button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="pt-6">
+        <ion-button class="shadow bold" size="large" color="danger" expand="full" (click)="checkoutItem()">CHECKOUT</ion-button>
+      </div>
+    </div>
+  </div>
+</ion-content>

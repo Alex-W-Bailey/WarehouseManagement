@@ -68,7 +68,6 @@ export class CheckoutPage implements OnInit {
 
     await this.api.setWarehouseSlot(this.companyId, this.slotId, null, null).subscribe(async (result) => {
       var dataVals = Object.values(result)
-      console.log(dataVals)
 
       if (dataVals[2].includes("slot_id not found!")) {
         const errAlert = await this.alertCtrl.create({
@@ -102,6 +101,7 @@ export class CheckoutPage implements OnInit {
         successAlert.present();
       }
 
-      await loading.dismiss();    });
+      await loading.dismiss();    
+    });
   }
 }

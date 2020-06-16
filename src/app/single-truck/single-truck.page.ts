@@ -157,7 +157,6 @@ export class SingleTruckPage implements OnInit {
                         console.log("img uploaded");
                       }
                       else {
-                        console.log("err");
                         showErr(this.alertCtrl);
   
                         async function showErr(alertCtrl) {

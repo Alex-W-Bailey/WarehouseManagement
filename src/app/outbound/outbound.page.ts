@@ -67,7 +67,6 @@ export class OutboundPage implements OnInit {
 
     await this.api.setWarehouseSlot(this.companyId, this.slotId, this.po_soId, "Outbound").subscribe(async (data) => {
       var dataVals = Object.values(data)
-      console.log(dataVals)
 
       if (dataVals[2].includes("slot_id not found!")) {
         const errAlert = await this.alertCtrl.create({

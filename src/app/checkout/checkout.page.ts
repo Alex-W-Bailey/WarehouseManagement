@@ -87,7 +87,7 @@ export class CheckoutPage implements OnInit {
       }
       else {
         const successAlert = await this.alertCtrl.create({
-          message: "Item Added To Slot",
+          message: "Item Removed From Slot",
           buttons: [
             {
               text: 'OK',

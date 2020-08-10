@@ -36,6 +36,8 @@ export class CheckoutPage implements OnInit {
     });
   }
 
+
+
   scanBarcode(itemScanned) {
     const options: BarcodeScannerOptions = {
       preferFrontCamera: false,
@@ -62,12 +64,54 @@ export class CheckoutPage implements OnInit {
     });
   }
 
+  linkClick(itemClicked) {
+    if(itemClicked === "single") {
+      showSection("single");
+    }
+    else {
+      showSection("bulk");
+    }
+
+    function showSection(itemToChangeToBlue) {
+      var singleSection = document.getElementById("single-section");
+      var bulkSection = document.getElementById("bulk-section");
+
+      var singleTitle = document.getElementById("single");
+      var bulkTitle = document.getElementById("bulk");
+
+      singleSection.classList.remove("show");
+      singleSection.classList.remove("remove");
+      bulkSection.classList.remove("show");
+      bulkSection.classList.remove("remove");
+
+      singleTitle.classList.remove("alt-blue-text");
+      singleTitle.classList.remove("white-text");
+      bulkTitle.classList.remove("alt-blue-text");
+      bulkTitle.classList.remove("white-text");
+
+      if(itemToChangeToBlue === "single") {
+        singleSection.classList.add("show");
+        bulkSection.classList.add("hide");
+
+        singleTitle.classList.add("alt-blue-text");
+        bulkTitle.classList.add("white-text");
+      }
+      else {
+        bulkSection.classList.add("show");
+        singleSection.classList.add("hide");
+
+        bulkTitle.classList.add("alt-blue-text");
+        singleTitle.classList.add("white-text");
+      }
+    }
+  }
+
   async checkoutItem() {
     const loading = await this.loadingCtrl.create({});
-    await loading.present()
+    await loading.present();
 
     await this.api.setWarehouseSlot(this.companyId, this.slotId, null, null).subscribe(async (result) => {
-      var dataVals = Object.values(result)
+      var dataVals = Object.values(result);
 
       if (dataVals[2].includes("slot_id not found!")) {
         const errAlert = await this.alertCtrl.create({

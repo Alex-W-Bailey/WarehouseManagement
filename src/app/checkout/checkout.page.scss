@@ -43,6 +43,10 @@
   0 100px 80px rgba(0, 0, 0, 0.12)
 }
 
+.label-link {
+    margin-left: 20px;
+}
+
 .orderInfoSection {
     margin-top: 45px;
 }
@@ -124,6 +128,18 @@
     background-color: #0B3049;
 }
 
+.hide {
+    display: none;
+}
+
+.show {
+    display: inline;
+}
+
 .white-text {
     color: white;
+}
+
+.alt-blue-text {
+    color: #64aad1;
 }

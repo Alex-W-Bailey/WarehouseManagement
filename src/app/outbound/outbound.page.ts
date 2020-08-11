@@ -65,42 +65,42 @@ export class OutboundPage implements OnInit {
     const loading = await this.loadingCtrl.create({});
     await loading.present();
 
-    await this.api.setWarehouseSlot(this.companyId, this.slotId, this.po_soId, "Outbound").subscribe(async (data) => {
-      var dataVals = Object.values(data)
+    await this.api.slotCheckin(this.companyId, this.slotId, this.po_soId, "Outbound").subscribe(async (result) => {
+      var dataVals = Object.values(result)
 
-      if (dataVals[2].includes("slot_id not found!")) {
-        const errAlert = await this.alertCtrl.create({
-          message: "Slot Does Not Exist",
-          buttons: [
-            {
-              text: 'OK',
-              handler: async () => {
-                await errAlert.dismiss();
+        if (dataVals[2].includes("Slot ID does not exists!")) {
+          const errAlert = await this.alertCtrl.create({
+            message: "Slot Does Not Exist",
+            buttons: [
+              {
+                text: 'OK',
+                handler: async () => {
+                  await errAlert.dismiss();
+                }
               }
-            }
-          ]
-        });
-
-        errAlert.present();
-      }
-      else {
-        const successAlert = await this.alertCtrl.create({
-          message: "Item Removed From Slot",
-          buttons: [
-            {
-              text: 'OK',
-              handler: async () => {
-                await successAlert.dismiss();
-                window.location.href = "/home";
+            ]
+          });
+  
+          errAlert.present();
+        }
+        else {
+          const successAlert = await this.alertCtrl.create({
+            message: "Item Set Outbound!",
+            buttons: [
+              {
+                text: 'OK',
+                handler: async () => {
+                  await successAlert.dismiss();
+                  window.location.href = "/home";
+                }
               }
-            }
-          ]
-        });
-
-        successAlert.present();
-      }
-
-      await loading.dismiss();
+            ]
+          });
+  
+          successAlert.present();
+        }
+  
+        await loading.dismiss();
     });
   }
 }

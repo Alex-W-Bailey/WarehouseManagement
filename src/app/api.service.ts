@@ -25,6 +25,18 @@ export class ApiService {
         return this.httpClient.get(`http://54.235.248.192/fs_api/trailerWebServices/updateWarehouseSlot.php?company_id=${companyId}&slot_id=${slot_id}&slot_item_id=${slot_item_id}&slot_group=${slot_group}`)
     }
 
+    public slotCheckin(companyId, slot_id, slot_item_id, slot_group) {
+        return this.httpClient.get(`http://54.235.248.192/fs_api/trailerWebServices/checking_in.php?company_id=${companyId}&slot_id=${slot_id}&slot_item_id=${slot_item_id}&slot_group=${slot_group}`);
+    }
+
+    public slotCheckoutSingle(companyId, slot_id, slot_item_id) {
+        return this.httpClient.get(`http://54.235.248.192/fs_api/trailerWebServices/checking_out.php?company_id=${companyId}&slot_id=${slot_id}&slot_item_id=${slot_item_id}`);
+    }
+
+    public slotCheckoutBulk(companyId, slot_item_id) {
+        return this.httpClient.get(`http://54.235.248.192/fs_api/trailerWebServices/bulk_checking_out.php?company_id=${companyId}&slot_item_id=${slot_item_id}`);
+    }
+
     public addPicture(houseId, img) {
         console.log("API");
         console.log(houseId);

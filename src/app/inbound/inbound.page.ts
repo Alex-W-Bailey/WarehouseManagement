@@ -66,11 +66,13 @@ export class InboundPage implements OnInit {
     const loading = await this.loadingCtrl.create({});
     await loading.present();
 
-    await this.api.setWarehouseSlot(this.companyId, this.slotId, this.po_soId, "Inbound").subscribe(async (data) => {
-      var dataVals = Object.values(data)
+    await this.api.slotCheckin(this.companyId, this.slotId, this.po_soId, "Inbound").subscribe(async (result) => {
+      console.log(result);
+
+      var dataVals = Object.values(result)
       console.log(dataVals)
 
-      if (dataVals[2].includes("slot_id not found!")) {
+      if (dataVals[2].includes("Slot ID does not exists")) {
         const errAlert = await this.alertCtrl.create({
           message: "Slot Does Not Exist",
           buttons: [

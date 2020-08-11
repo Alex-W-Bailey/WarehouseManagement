@@ -19,6 +19,9 @@ export class CheckoutPage implements OnInit {
   slotId: string = "";
   po_soId: string = "";
 
+  shouldSingleCheckout: boolean = true;
+  shouldBulkCheckout: boolean = false;
+
   companyId: any;
   pro_number: any;
 
@@ -65,10 +68,20 @@ export class CheckoutPage implements OnInit {
   }
 
   linkClick(itemClicked) {
-    if(itemClicked === "single") {
+    if (itemClicked === "single") {
+      this.po_soId = "";
+      this.slotId = "";
+      this.shouldSingleCheckout = true;
+      this.shouldBulkCheckout = false;
+
       showSection("single");
     }
     else {
+      this.po_soId = "";
+      this.slotId = "";
+      this.shouldSingleCheckout = false;
+      this.shouldBulkCheckout = true;
+
       showSection("bulk");
     }
 
@@ -89,7 +102,7 @@ export class CheckoutPage implements OnInit {
       bulkTitle.classList.remove("alt-blue-text");
       bulkTitle.classList.remove("white-text");
 
-      if(itemToChangeToBlue === "single") {
+      if (itemToChangeToBlue === "single") {
         singleSection.classList.add("show");
         bulkSection.classList.add("hide");
 
@@ -107,45 +120,91 @@ export class CheckoutPage implements OnInit {
   }
 
   async checkoutItem() {
+    console.log("single: " + this.shouldSingleCheckout);
+    console.log("bulk: " + this.shouldBulkCheckout + "\n");
+    console.log("po/so: " + this.po_soId);
+    console.log("slot_id: " + this.slotId);
+
     const loading = await this.loadingCtrl.create({});
     await loading.present();
 
-    await this.api.setWarehouseSlot(this.companyId, this.slotId, null, null).subscribe(async (result) => {
-      var dataVals = Object.values(result);
+    if (this.shouldSingleCheckout) {
+      await this.api.slotCheckoutSingle(this.companyId, this.slotId, this.po_soId).subscribe(async (result) => {
+        var dataVals = Object.values(result);
 
-      if (dataVals[2].includes("slot_id not found!")) {
-        const errAlert = await this.alertCtrl.create({
-          message: "Slot Does Not Exist",
-          buttons: [
-            {
-              text: 'OK',
-              handler: async () => {
-                await errAlert.dismiss();
+        if (dataVals[2].includes("Slot ID does not exists!")) {
+          const errAlert = await this.alertCtrl.create({
+            message: "Slot Does Not Exist",
+            buttons: [
+              {
+                text: 'OK',
+                handler: async () => {
+                  await errAlert.dismiss();
+                }
               }
-            }
-          ]
-        });
+            ]
+          });
 
-        errAlert.present();
-      }
-      else {
-        const successAlert = await this.alertCtrl.create({
-          message: "Item Removed From Slot",
-          buttons: [
-            {
-              text: 'OK',
-              handler: async () => {
-                await successAlert.dismiss();
-                window.location.href = "/home";
+          errAlert.present();
+        }
+        else {
+          const successAlert = await this.alertCtrl.create({
+            message: "Item Removed From Slot",
+            buttons: [
+              {
+                text: 'OK',
+                handler: async () => {
+                  await successAlert.dismiss();
+                  window.location.href = "/home";
+                }
               }
-            }
-          ]
-        });
+            ]
+          });
 
-        successAlert.present();
-      }
+          successAlert.present();
+        }
 
-      await loading.dismiss();    
-    });
+        await loading.dismiss();
+      });
+    }
+    else if (this.shouldBulkCheckout) {
+      await this.api.slotCheckoutBulk(this.companyId, this.po_soId).subscribe(async (result) => {
+        var dataVals = Object.values(result);
+  
+        if (dataVals[2].includes("does not exists")) {
+          const errAlert = await this.alertCtrl.create({
+            message: "PO Does Not Exist",
+            buttons: [
+              {
+                text: 'OK',
+                handler: async () => {
+                  await errAlert.dismiss();
+                }
+              }
+            ]
+          });
+  
+          errAlert.present();
+        }
+        else {
+          const successAlert = await this.alertCtrl.create({
+            message: "Item Removed From All Slots",
+            buttons: [
+              {
+                text: 'OK',
+                handler: async () => {
+                  await successAlert.dismiss();
+                  window.location.href = "/home";
+                }
+              }
+            ]
+          });
+  
+          successAlert.present();
+        }
+  
+        await loading.dismiss();
+      });
+    }
   }
 }

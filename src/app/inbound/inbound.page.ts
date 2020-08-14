@@ -66,45 +66,81 @@ export class InboundPage implements OnInit {
     const loading = await this.loadingCtrl.create({});
     await loading.present();
 
-    await this.api.slotCheckin(this.companyId, this.slotId, this.po_soId, "Inbound").subscribe(async (result) => {
-      console.log(result);
+    if (this.po_soId == "") {
+      loading.dismiss();
 
-      var dataVals = Object.values(result)
-      console.log(dataVals)
-
-      if (dataVals[2].includes("Slot ID does not exists")) {
-        const errAlert = await this.alertCtrl.create({
-          message: "Slot Does Not Exist",
-          buttons: [
-            {
-              text: 'OK',
-              handler: async () => {
-                await errAlert.dismiss();
-              }
+      const errAlert = await this.alertCtrl.create({
+        message: "PO/SO is required",
+        buttons: [
+          {
+            text: 'OK',
+            handler: async () => {
+              await errAlert.dismiss();
             }
-          ]
-        });
+          }
+        ]
+      });
 
-        errAlert.present();
-      }
-      else {
-        const successAlert = await this.alertCtrl.create({
-          message: "Item Added To Slot",
-          buttons: [
-            {
-              text: 'OK',
-              handler: async () => {
-                await successAlert.dismiss();
-                window.location.href = "/home";
-              }
+      errAlert.present();
+    }
+    else if (this.slotId == "") {
+      loading.dismiss();
+
+      const errAlert = await this.alertCtrl.create({
+        message: "Slot ID is required",
+        buttons: [
+          {
+            text: 'OK',
+            handler: async () => {
+              await errAlert.dismiss();
             }
-          ]
-        });
+          }
+        ]
+      });
 
-        successAlert.present();
-      }
+      errAlert.present();
+    }
+    else {
+      await this.api.slotCheckin(this.companyId, this.slotId, this.po_soId, "Inbound").subscribe(async (result) => {
+        console.log(result);
 
-      await loading.dismiss();
-    });
+        var dataVals = Object.values(result)
+        console.log(dataVals)
+
+        if (dataVals[2].includes("Slot ID does not exists")) {
+          const errAlert = await this.alertCtrl.create({
+            message: "Slot Does Not Exist",
+            buttons: [
+              {
+                text: 'OK',
+                handler: async () => {
+                  await errAlert.dismiss();
+                }
+              }
+            ]
+          });
+
+          errAlert.present();
+        }
+        else {
+          const successAlert = await this.alertCtrl.create({
+            message: "Item Added To Slot",
+            buttons: [
+              {
+                text: 'OK',
+                handler: async () => {
+                  await successAlert.dismiss();
+                  window.location.href = "/home";
+                }
+              }
+            ]
+          });
+
+          successAlert.present();
+        }
+
+        await loading.dismiss();
+      });
+    }
   }
 }

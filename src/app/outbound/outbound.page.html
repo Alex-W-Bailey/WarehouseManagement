@@ -22,24 +22,6 @@
         <div class="scanSection">
           <div class="scanTitle alt-blue shadow">
             <div class="container">
-              <ion-icon class="scanTitleIcon inline" name="file-tray"></ion-icon>
-              <h3 class="inline white-text bold sm-text m-0 pt-title">SLOT ID</h3>
-            </div>
-          </div>
-          <div class="scanBody shadow blue">
-            <div class="container pt-2">
-              <ion-item color="dark">
-                <ion-input [(ngModel)]="slotId" placeholder="Scan or Type Slot ID"></ion-input>
-              </ion-item>
-              <ion-button size="default" expand="block" (click)="scanBarcode('slot')"><ion-icon class="white-text md-text" name="barcode-outline"></ion-icon></ion-button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="orderInfoSection">
-        <div class="scanSection">
-          <div class="scanTitle alt-blue shadow">
-            <div class="container">
               <ion-icon name="cube" class="scanTitleIcon"></ion-icon>
               <h3 class="inline white-text bold sm-text m-0 pt-title">PO / SO ID</h3>
             </div>
@@ -49,13 +31,36 @@
               <ion-item color="dark">
                 <ion-input [(ngModel)]="po_soId" placeholder="Scan or Type PO / SO ID"></ion-input>
               </ion-item>
-              <ion-button size="default" expand="block" (click)="scanBarcode('po-so')"><ion-icon class="white-text md-text" name="barcode-outline"></ion-icon></ion-button> 
+              <ion-button size="default" expand="block" (click)="scanBarcode('po-so')">
+                <ion-icon class="white-text md-text" name="barcode-outline"></ion-icon>
+              </ion-button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="orderInfoSection">
+        <div class="scanSection">
+          <div class="scanTitle alt-blue shadow">
+            <div class="container">
+              <ion-icon class="scanTitleIcon inline" name="file-tray"></ion-icon>
+              <h3 class="inline white-text bold sm-text m-0 pt-title">SLOT ID</h3>
+            </div>
+          </div>
+          <div class="scanBody shadow blue">
+            <div class="container pt-2">
+              <ion-item color="dark">
+                <ion-input [(ngModel)]="slotId" placeholder="Scan or Type Slot ID"></ion-input>
+              </ion-item>
+              <ion-button size="default" expand="block" (click)="scanBarcode('slot')">
+                <ion-icon class="white-text md-text" name="barcode-outline"></ion-icon>
+              </ion-button>
             </div>
           </div>
         </div>
       </div>
       <div class="pt-6">
-        <ion-button class="shadow bold" size="large" color="danger" expand="full" (click)="removeOrderFromBin()">SET OUTBOUND</ion-button>
+        <ion-button class="shadow bold" size="large" color="danger" expand="full" (click)="removeOrderFromBin()">SET
+          OUTBOUND</ion-button>
       </div>
     </div>
   </div>

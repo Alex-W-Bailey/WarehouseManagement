@@ -65,8 +65,45 @@ export class OutboundPage implements OnInit {
     const loading = await this.loadingCtrl.create({});
     await loading.present();
 
-    await this.api.slotCheckin(this.companyId, this.slotId, this.po_soId, "Outbound").subscribe(async (result) => {
-      var dataVals = Object.values(result)
+    if (this.po_soId == "") {
+      loading.dismiss();
+
+      const errAlert = await this.alertCtrl.create({
+        message: "PO/SO is required",
+        buttons: [
+          {
+            text: 'OK',
+            handler: async () => {
+              await errAlert.dismiss();
+            }
+          }
+        ]
+      });
+
+      errAlert.present();
+    }
+    else if (this.slotId == "") {
+      loading.dismiss();
+
+      const errAlert = await this.alertCtrl.create({
+        message: "Slot ID is required",
+        buttons: [
+          {
+            text: 'OK',
+            handler: async () => {
+              await errAlert.dismiss();
+            }
+          }
+        ]
+      });
+
+      errAlert.present();
+    }
+    else {
+      await this.api.slotCheckin(this.companyId, this.slotId, this.po_soId, "Outbound").subscribe(async (result) => {
+        console.log(result)
+        
+        var dataVals = Object.values(result)
 
         if (dataVals[2].includes("Slot ID does not exists!")) {
           const errAlert = await this.alertCtrl.create({
@@ -80,7 +117,7 @@ export class OutboundPage implements OnInit {
               }
             ]
           });
-  
+
           errAlert.present();
         }
         else {
@@ -96,11 +133,12 @@ export class OutboundPage implements OnInit {
               }
             ]
           });
-  
+
           successAlert.present();
         }
-  
+
         await loading.dismiss();
-    });
+      });
+    }
   }
 }

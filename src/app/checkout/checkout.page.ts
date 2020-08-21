@@ -145,23 +145,6 @@ export class CheckoutPage implements OnInit {
 
       errAlert.present();
     }
-    else if (this.slotId == "") {
-      loading.dismiss();
-
-      const errAlert = await this.alertCtrl.create({
-        message: "Slot ID is required",
-        buttons: [
-          {
-            text: 'OK',
-            handler: async () => {
-              await errAlert.dismiss();
-            }
-          }
-        ]
-      });
-
-      errAlert.present();
-    }
     else {
       if (this.shouldSingleCheckout) {
         await this.api.slotCheckoutSingle(this.companyId, this.slotId, this.po_soId).subscribe(async (result) => {
@@ -220,6 +203,7 @@ export class CheckoutPage implements OnInit {
       }
       else if (this.shouldBulkCheckout) {
         await this.api.slotCheckoutBulk(this.companyId, this.po_soId).subscribe(async (result) => {
+          console.log();
           
           var dataVals = Object.values(result);
 

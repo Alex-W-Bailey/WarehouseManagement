@@ -26,6 +26,8 @@ export class ApiService {
     }
 
     public slotCheckin(companyId, slot_id, slot_item_id, slot_group) {
+        console.log("setting item status to: " + slot_group);
+
         return this.httpClient.get(`http://54.235.248.192/fs_api/trailerWebServices/checking_in.php?company_id=${companyId}&slot_id=${slot_id}&slot_item_id=${slot_item_id}&slot_group=${slot_group}`);
     }
 

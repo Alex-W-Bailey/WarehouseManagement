@@ -101,7 +101,7 @@ export class InboundPage implements OnInit {
       errAlert.present();
     }
     else {
-      await this.api.slotCheckin(this.companyId, this.slotId, this.po_soId, "Inbound").subscribe(async (result) => {
+      await this.api.slotCheckin(this.companyId, this.slotId, this.po_soId, "InboundTest").subscribe(async (result) => {
         console.log(result);
 
         var dataVals = Object.values(result)

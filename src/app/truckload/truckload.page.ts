@@ -225,8 +225,8 @@ export class TruckloadPage implements OnInit {
   takePicture() {
     const options: CameraOptions = {
       quality: 75,
-      targetHeight: 480,
-      targetWidth: 640,
+      targetHeight: 4032,
+      targetWidth: 3024,
       destinationType: this.camera.DestinationType.DATA_URL,
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE,

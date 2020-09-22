@@ -56,4 +56,8 @@ export class HomePage {
   checkout() {
     window.location.href = "/checkout";
   }
+
+  document() {
+    window.location.href = "/document-upload";
+  }
 }

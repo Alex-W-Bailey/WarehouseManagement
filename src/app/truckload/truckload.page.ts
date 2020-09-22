@@ -5,7 +5,7 @@ import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { interval } from 'rxjs';
 import { ModalController, AlertController } from '@ionic/angular';
 import { Plugins } from '@capacitor/core';
-
+import { Base64ToGallery } from '@ionic-native/base64-to-gallery/ngx';
 import { ModalpagePage } from '../modals/modalpage/modalpage.page';
 import { TruckItemPage } from '../modals/truck-item/truck-item.page';
 import { async } from '@angular/core/testing';
@@ -19,7 +19,7 @@ const { Storage } = Plugins;
 })
 export class TruckloadPage implements OnInit {
 
-  constructor(private barcodeCtrl: BarcodeScanner, private camera: Camera, private renderer: Renderer2, private modalCtrl: ModalController, public alertCtrl: AlertController) { }
+  constructor(private base64ToGallery: Base64ToGallery, private barcodeCtrl: BarcodeScanner, private camera: Camera, private renderer: Renderer2, private modalCtrl: ModalController, public alertCtrl: AlertController) { }
 
   truckItems: any;
   pro_number: string = "";
@@ -224,13 +224,12 @@ export class TruckloadPage implements OnInit {
 
   takePicture() {
     const options: CameraOptions = {
-      quality: 75,
+      quality: 10,
       targetHeight: 4032,
       targetWidth: 3024,
-      destinationType: this.camera.DestinationType.DATA_URL,
+      destinationType: this.camera.DestinationType.FILE_URI,
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE,
-      correctOrientation: true,
     }
 
     this.camera.getPicture(options).then((imgData) => {

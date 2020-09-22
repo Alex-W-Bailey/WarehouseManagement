@@ -54,4 +54,18 @@ export class ApiService {
             }
         );
     }
+
+    public addShipment(data) {
+        this.nativeHttp.setDataSerializer("json");
+        return this.nativeHttp.sendRequest("https://r6on410fg2.execute-api.us-east-1.amazonaws.com/prod/addshipment",
+            {
+                method: 'post',
+                data: data,
+                headers: {
+                    "Access-Control-Allow-Origin": "*", 'Accept': 'application/x-www-form-urlencoded',
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
+            }
+        );
+    }
 } 

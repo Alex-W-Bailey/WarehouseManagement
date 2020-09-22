@@ -1,0 +1,47 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-buttons slot="start">
+      <ion-back-button style="float: left;" defaultHref="home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      <img class="logo-header" src="../../assets/imgs/2x7-FreightSnap-Logo-Stickers.jpg" />
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="content">
+    <div class="container">
+      <div class="title">
+        <h1 class="title-text">Document Upload</h1>
+      </div>
+      <div id="document-imgs">
+        <div class="container">
+          <div class="mt-4">
+            <p class="alt-blue-text font-jost bold">Step 1:</p>
+            <p class="font-jost white-text pl-1">Enter Document Name</p>
+          </div>
+          <ion-input class="white-text border-blue" placeholder="Type Document Name" [(ngModel)]="documentName"></ion-input>
+          <div class="mt-4">
+            <p class="alt-blue-text font-jost bold">Step 2:</p>
+            <p class="font-jost white-text pl-1">Upload Doument Image</p>        
+            <button class="newItemBtn" (click)="takePhoto()"><ion-icon name="add" class="button-icon md-text white-text bold"></ion-icon></button>
+          </div>
+          <h1 class="white-text bold m-0 font-merri xsm-text">All Document Images</h1>
+          <div id="all-document-imgs" class="all-document-imgs border-blue">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>
+
+<ion-footer class="ion-no-border">
+  <ion-toolbar color="dark">
+    <div class="footer dark">
+      <div class="container">
+        <button id="truckDoneBtn" class="upload-btn" (click)="upload()">UPLOAD</button>
+      </div>
+    </div>
+  </ion-toolbar>
+</ion-footer>
